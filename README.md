@@ -1,4 +1,3 @@
-# ecp-purchasing
 # 瑞招采
 
 #### 项目介绍
