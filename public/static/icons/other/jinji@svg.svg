@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>icon/紧急@svg</title>
+    <desc>Created with Sketch.</desc>
+    <g id="工作流（激活）" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="状态标签（多语言）" transform="translate(-414.000000, -473.000000)">
+            <g id="紧急" transform="translate(414.000000, 473.000000)">
+                <rect id="矩形备份" fill="#F59C25" x="0" y="0" width="20" height="20" rx="10"></rect>
+                <polygon id="路径-3" fill="#FFFFFF" points="9.3452381 5 13.6309524 5 10.952381 8.88888889 14.1666667 8.88888889 6.66666667 16.6666667 9.16666667 11.6666667 5.83333333 11.6666667"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

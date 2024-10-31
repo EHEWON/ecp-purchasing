@@ -1,0 +1,334 @@
+.body_container{
+    height: 100%;
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+
+a {color:#666; text-decoration:none; }
+a:visited {text-decoration:none;}
+a:focus{text-decoration: none}
+a:hover{text-decoration: none;}
+.flex_box {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+.flex_center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flex_direction_between {
+    justify-content: space-between;
+}
+.mt_12{
+    margin-top: 12px;
+}
+.ellipsis_nowrap {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    word-break: break-word;
+}
+.container_box{
+    background: #F2F3F7;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.top_banner {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100px;
+    background: #166FE8;
+    background-image:url('/static/ecp_index/bg.png');
+    background-blend-mode: soft-light;
+    background-position: center center; /* 水平垂直居中 */
+    background-repeat: no-repeat;
+    padding: 0;
+    z-index: 99999;
+}
+.search_box{
+    width: 1200px;
+    display: flex;
+    align-items: center;
+}
+.search_input{
+    margin-left: 93px;
+    width: 739px;
+    height: 40px;
+    background: #FFFFFF;
+    border: none;
+    padding: 0;
+    padding-left: 20px;
+    border-radius: 4px 0px 0px 4px;
+}
+.search_input:focus {
+    outline: none;
+}
+.search_btn{
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    background: #D6DEEE;
+    border: none;
+    border-radius: 0px 4px 4px 0px;
+    cursor: pointer;
+}
+.search_btn img{
+    width: 16px;
+    height: 16px;
+}
+.container_center{
+    width: 100%;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.show_contet{
+    width: 1200px;
+}
+.banner{
+    height: 360px;
+    line-height: 20px;
+    color: #333333;
+}
+.banner_left{
+    margin-right: 15px;
+}
+.banner_right{
+    padding: 20px;
+    width: 260px;
+    height: 360px;
+    background: #FFFFFF;
+    font-size: 12px;
+    box-sizing: border-box;
+}
+.btn_box{
+    padding: 0;
+    box-sizing: border-box
+}
+.bth{
+    width: 88px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+}
+.btn_login{
+    background: #FFFFFF;
+    border-radius: 4px;
+    border: 1px solid #006CFF;
+    color: #006CFF;
+    margin-right: 8px;
+}
+.btn_register{
+    background: #006CFF;
+    border: 1px solid #006CFF;
+    border-radius: 4px;
+    color: #FFFFFF;
+    margin-left: 8px;
+}
+.tab_box{
+    border-bottom: 1px solid#E3E3E3;
+}
+.tab_li{
+    margin-bottom: -1px;
+    text-align: center;
+    width: 88px;
+    line-height: 24px;
+    border-bottom: 1px solid#E3E3E3;
+    cursor: pointer;
+}
+.tab_li.actived{
+    color: #006CFF;
+    border-color: #006CFF;
+}
+.tab_menu_box{
+    width: 100%;
+    overflow-y: auto;
+    -ms-overflow-style: none; /* Internet Explorer 和 Edge */
+    scrollbar-width: none; /* Firefox */
+    padding: 10px 0;
+    height: 220px;
+    box-sizing: border-box;
+    display: none;
+}
+.tab_menu_box.actived{
+    display: block;
+}
+.tab_menu_li{
+    width: 180px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: #333333;
+    line-height: 20px;
+    padding: 5px 0;
+    padding-left: 15px;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+.tab_menu_li:hover{
+    color: #006CFF;
+}
+.tab_menu_li:after{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 6px;
+    height: 6px;
+    background: #BBBBBB;
+    border-radius: 50%;
+}
+.tab_menu_li:hover:after {
+    background: #006CFF;
+}
+/* 针对 WebKit 浏览器（如 Chrome, Safari） */
+.tab_menu_box::-webkit-scrollbar {
+    display: none; /* 隐藏滚动条 */
+}
+.project{
+    margin-top: 20px;
+}
+.project_title{
+    width: 100%;
+    height: 50px;
+    background-image:url('/static/ecp_index/title_bg.png');
+}
+.project_title span{
+    position: relative;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 18px;
+    color: #FFFFFF;
+    line-height: 50px;
+    padding-left: 28px;
+}
+.project_title span :before{
+    content: '';
+    position:absolute;
+    width: 4px;
+    height: 20px;
+    background: #FFFFFF;
+    left: 15px;
+    top:0px;
+}
+.project_box{
+    margin-top: 12px;
+}
+.project_item{
+    display: flex;
+    align-items: center;
+    width: 1200px;
+    height: 60px;
+    background: #FFFFFF;
+    border: 1px solid #E9E9E9;
+    line-height: 20px;
+    font-size: 14px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+.project_item .item_title{
+    width: 450px;
+    font-weight: bold;
+    color: #333333;
+}
+.project_item .item_title a{ 
+    font-weight: bold;
+    text-decoration: none;
+    color: #333333;
+}
+.project_item .item_title:hover{
+    color: #006CFF;
+    text-decoration: underline;
+    text-decoration-color: #006CFF;
+}
+.project_item .item_title a:hover{
+    color: #006CFF;
+    text-decoration: underline;
+    text-decoration-color: #006CFF;
+}
+.project_item .name{
+    width: 250px;
+    padding-left: 24px;
+    color: #697179;
+}
+.project_item .time{
+    width: 230px;
+    padding-left: 24px;
+    color: #969FA9;
+}
+.project_item .tag {
+    line-height: 18px;
+}
+.project_item .tag-warning{
+    background: #FFF8E8;
+    border: 1px solid #FFD2B1;
+    border-radius: 2px;
+    padding: 2px 10px;
+    color: #FFA63E;
+    font-size: 12px;
+}
+.project_item .btn_box{
+    flex: 1;
+    cursor: pointer;
+}
+.project_item .btn_box span{
+    float: right;
+    display: flex;
+    align-items: center;
+    color: #006CFF;
+}
+.project_item .btn_box span img{
+    margin-left: 5px;
+    width: 12px;
+    height: 12px;
+}
+.record{
+    padding: 28px;
+    text-align: center;
+    font-weight: 400;
+    font-size: 14px;
+    color: #999999;
+}
+.container {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    padding: 0;
+}
+.ecp_nav_box{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+.ecp_nav_box a{
+  font-size: 14px;
+  font-family: PingFang SC;
+  font-weight: 400;
+  color: #666666;
+  cursor: pointer;
+}
+.ecp_nav_box i{
+  margin: 0 4px;
+  font-size: 14px;
+  font-family: PingFang SC;
+  font-weight: 400;
+  color: #666666;
+}
+.ecp_nav_box span{
+  font-size: 14px;
+  font-family: PingFang SC;
+  font-weight: 400;
+  color: #97A8BE;
+}

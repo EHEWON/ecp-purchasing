@@ -1,0 +1,66 @@
+# 数据库的默认账号和密码仅首次运行时设置有效
+# 如果修改了账号密码，记得改数据库和项目连接参数，别只改一处~
+# 该配置文件只是给快速启动，测试使用。正式使用，记得务必修改账号密码，以及调整合适的知识库参数，共享内存等。
+# 如何无法访问 dockerhub 和 git，可以用阿里云（阿里云没有arm包）
+
+version: '1.0'
+services:
+  mysql:
+    image: mysql:5.7.28
+    container_name: mysql5
+    restart: always
+    ports:
+      - 3308:3306
+    networks:
+      - ecpnet
+    environment:
+      MYSQL_DATABASE: 'ecp_data'
+      MYSQL_USER: 'ecp'
+      MYSQL_PASSWORD: 'ecp@2024'
+      MYSQL_ROOT_PASSWORD: 'ecp@2024'
+    volumes:
+      - /www/server/mysql:/var/lib/mysql
+  redis:
+    image: redis:5.0.12
+    container_name: redis5
+    restart: always
+    ports:
+      - 6378:6379
+    networks:
+      - ecpnet
+    volumes:
+      - /www/server/redis/data:/usr/local/redis/data
+      - /www/server/redis/etc/redis.conf:/usr/local/redis/etc/redis.conf
+  php:
+    image: zhongyg/php82:v1.0
+    container_name: php8
+    restart: always
+    ports: 
+      - 9002:9002
+    networks:
+      - ecpnet
+    volumes:
+      - /www/wwwroot:/var/www/html
+    working_dir: /var/www/html
+    stdin_open: true
+    tty: true
+    depends_on:
+      - mysql
+      - redis
+  nginx:
+    image: nginx:1.27.1
+    container_name: nginx27
+    restart: always
+    ports:
+      - 8090:80
+      - 8443:443
+    networks:
+      - ecpnet
+    depends_on:
+      - php
+    volumes:
+      - /www/wwwroot/:/usr/share/nginx/html
+      - /www/server/nginx/nginx/:/etc/nginx/conf.d/
+    entrypoint:
+networks:
+  ecpnet:

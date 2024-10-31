@@ -1,0 +1,111 @@
+<?php
+
+namespace App\Modules\Admin\Service;
+
+use App\Common\Contracts\Service;
+use App\Modules\Admin\Repository\BankSettingRepo;
+use App\Modules\Admin\Middleware\BankSettingMiddleware;
+use Illuminate\Support\Facades\Redis;
+use Illuminate\Http\Request;
+
+class BankSettingService extends Service {
+
+    protected $guard = 'admin';
+    public $middleware = [
+        BankSettingMiddleware::class => ['only' => ['add', 'edited', 'enable', 'disable', 'delete']],
+    ];
+    public $beforeEvent = [];
+    public $afterEvent = [
+    ];
+
+    public function getRules() {
+        return [
+        ];
+    }
+
+    public function getMessages() {
+        return [
+        ];
+    }
+    protected $model;
+
+    public function __construct() {
+        parent::__construct();
+    }
+
+    /**
+     * 人员类型列表
+     * @param Request $request
+     */
+    public function getList(Request $request) {
+        return (new BankSettingRepo())->getList($request);
+    }
+
+    /**
+     * 人员类型信息
+     * @return
+     */
+    public function info($id) {
+        return (new BankSettingRepo)->info($id);
+    }
+
+    /**
+     * 修改人员类型
+     * @return
+     */
+    public function edited(Request $request) {
+        return (new BankSettingRepo)->edited($request->id, $request);
+    }
+
+    /**
+     * 新增人员类型
+     * @return
+     */
+    public function add(Request $request) {
+        return (new BankSettingRepo)->add($request);
+    }
+
+    /**
+     * 新增人员类型
+     * @return
+     */
+    public function enable(Request $request) {
+        return (new BankSettingRepo)->enable($request);
+    }
+
+    /**
+     * 新增人员类型
+     * @return
+     */
+    public function disable(Request $request) {
+        return (new BankSettingRepo)->disable($request);
+    }
+
+    /**
+     * 新增人员类型
+     * @return
+     */
+    public function delete(Request $request) {
+        return (new BankSettingRepo)->deleteData($request);
+    }
+
+    public function export(Request $request) {
+        return (new BankSettingRepo)->export($request);
+    }
+
+    public function import(Request $request) {
+        return (new BankSettingRepo)->import($request);
+    }
+
+    public function number() {
+        $newNumber = null;
+        $redisKey = 'ECP:BRANKSETTING:' . date('Ymd');
+        if (Redis::command('exists', [$redisKey])) {
+            $newNumber = Redis::get($redisKey);
+        }
+        $number = (new BankSettingRepo)->getBrankSettingNo($newNumber);
+        Redis::set($redisKey, $number, 86400);
+        return $number;
+    }
+
+}

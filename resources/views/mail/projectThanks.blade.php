@@ -1,0 +1,2 @@
+<p><p style="line-height: 2em; color: rgb(80, 80, 80); font-family: 微软雅黑, Arial; font-size: 14px;white-space: normal;"><span style="color:black;display: inline-block;font-weight:bold; ">致 : {{$supplier_name}}  </span></p><p style="line-height: 2em; color: rgb(80, 80, 80); font-family: 微软雅黑, Arial; font-size: 14px;white-space: normal; display: inline-block;width:100%;">&nbsp;&nbsp;&nbsp;&nbsp;&#8203;&nbsp;&nbsp;&nbsp;&nbsp;&#8203;我们对贵公司参与【{{$name}}】的投标表示衷心的感谢，但很遗憾地通知您，贵公司的投标书未能在本次竞标中胜出，再次感谢您的参与和努力。</span>
+</p></p>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>icon/驳回@svg</title>
+    <desc>Created with Sketch.</desc>
+    <g id="工作流（激活）" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="状态标签（多语言）" transform="translate(-414.000000, -540.000000)">
+            <g id="驳回" transform="translate(414.000000, 540.000000)">
+                <rect id="矩形备份" fill="#F35A59" fill-rule="evenodd" x="0" y="0" width="20" height="20" rx="10"></rect>
+                <polyline id="路径-5" stroke="#FCFCFC" stroke-width="1.66666667" points="8.33333333 7.5 13.3333333 7.5 13.3333333 13.3333333 6.66666667 13.3333333"></polyline>
+                <polygon id="路径-4" fill="#FFFFFF" fill-rule="evenodd" points="8.33333333 4.16666667 8.33333333 10.8333333 5 7.5"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

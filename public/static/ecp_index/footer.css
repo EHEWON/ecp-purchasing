@@ -1,0 +1,130 @@
+/* 分页样式 */
+s, i, em {
+  font-style: normal;
+  text-decoration: none;
+}
+.page_content{
+  background: #fff;
+}
+.page_box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.page_box .lint_num_box {
+  font-size: 14px;
+  font-family: PingFang SC;
+  font-weight: 400;
+  color: #333333;
+  padding-top: 13px;
+}
+.in_block {
+  display: inline-block;
+}
+.plr_10 {
+  padding: 0 10px;
+}
+.border_right {
+  border-right: 1px solid #ccc;
+}
+.page_box .lint_num_box .active a{
+  color: #2976AF;
+}
+.page_box .page_box_page {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.mr_10 {
+  margin-right: 10px;
+}
+.pb_6 {
+  padding-bottom: 6px;
+}
+.pagination ul > li > a:hover, .pagination ul > li > a:focus{
+  background-color: #f5f5f5;
+  color: #315587;
+}
+
+/* 搜索条件默认12px   输入框占位符颜色#999 */
+body .layui-input-inline select,
+body .layui-input-inline input {
+font-size: 12px !important;
+}
+body .layui-input-inline input::-webkit-input-placeholder {
+color: #999 !important;
+}
+
+
+/*分页公共样式增加*/
+.pagination {
+margin: 0;
+float: left;
+}
+.page_box {
+display: flex;
+justify-content: space-between;
+align-items: center;
+height: 40px;
+}
+.page_box .lint_num_box {
+font-size: 14px;
+font-family: PingFang SC;
+font-weight: 400;
+color: #333333;
+padding-top: 0;
+flex: 1;
+display: flex;
+align-items: center;
+height: 30px;
+}
+.page_box .lint_num_box a{
+color: #333;
+}
+.page_box .in_block {
+display: inline-block;
+}
+.page_box .plr_10 {
+padding: 0 10px;
+}
+.page_box .border_right {
+border-right: 1px solid #ccc;
+}
+.page_box .lint_num_box .active a{
+color: #2976AF;
+}
+.page_box .page_box_page {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.page_box .mr_10 {
+margin-right: 10px;
+}
+.page_box .pb_6 {
+padding-bottom: 6px;
+}
+.pagination ul > li>a{
+background: #fff;
+color: #315587;
+}
+.pagination ul > .active > a,.pagination ul > .active > a:hover{
+color: #fff;
+background: #2976AF;
+}
+.page_box .page_right{
+float: left;
+margin-left: 8px;
+padding-top: 0;
+}
+.page_box .page_right > span{
+margin: 4px;
+}
+.page_box .page_right > input{
+width: 25px;
+margin: 0;
+text-align: center;
+border: 1px solid #ddd;
+height: 30px;
+border-radius: 4px;
+}

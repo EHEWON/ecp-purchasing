@@ -1,0 +1,152 @@
+@charset "UTF-8";
+.body_container{
+  background: #F2F3F7;
+  font: 14px / 150% Arial, Verdana, "微软雅黑", "\5b8b\4f53";
+  color: #333333;
+}
+.ecp_project_search{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 18px 20px;
+  background: #fff;
+}
+.ecp_project_search .flex_box{
+  height: 36px;
+  margin-bottom: 4px;
+}
+.ecp_project_search .title{
+  margin-right: 25px;
+}
+.condition_li{
+  font-size: 14px;
+  font-family: PingFang SC;
+  font-weight: 400;
+  color: #333;
+  line-height: 24px;
+  padding: 0 10px;
+  margin-right: 12px;
+  cursor: pointer;
+}
+.condition_li.actived{
+  background: #228DDD;
+  color: #fff;
+  border-radius: 2px;
+}
+.ecp_project_search .project_btn{
+  width: 64px;
+  height: 36px;
+  background: #2976AF;
+  border-radius: 2px;
+  font-size: 14px;
+  font-family: PingFang SC;
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 36px;
+  cursor: pointer;
+  text-align: center;
+}
+.mt_10{
+  margin-top: 10px;
+}
+.ecp_project_search .input_box{
+  position: relative;
+  margin-right: 20px;
+}
+.ecp_project_search .input_box::after{
+  position: absolute;
+  right: 11px;
+  width: 20px;
+  height: 20px;
+  content: '';
+  background: url('/static/ecp_index/search.png') no-repeat center;
+  top: 8px;
+}
+.ecp_project_search input{
+  width: 300px;
+  height: 36px;
+  background: #FFFFFF;
+  border: 1px solid #DCDEE2;
+  border-radius: 2px;
+  box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0 40px 0 10px;
+  font-size: 14px;
+}
+
+.tabel_box{
+  background: #fff;
+  box-sizing: border-box;
+  padding:0 20px;
+  width: 100%;
+  margin-top: 16px;
+  padding-bottom: 20px;
+
+}
+.tabel_box table{
+  width: 100%;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: auto !important;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+.tabel_box tr{
+  border-bottom: 1px solid #E2E5E9;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+}
+.tabel_box th{
+  height: 60px;
+  color: #333;
+  text-align: left;
+  margin: 0;
+}
+.tabel_box td{
+  height: 50px;
+  color: #666666;
+  text-align: left;
+  margin: 0;
+}
+.tabel_box .title{
+  width: 268px;
+  color: #333333;
+}
+.tabel_box .title a{
+  color: #333333;
+}
+.tabel_box .company_name{
+  width: 248px;
+}
+.tabel_box .table_btn{
+  color: #327DFF;
+}
+
+.tag-primary {
+  background: #ECF7FF;
+  border: 1px solid #B9E1FF;
+  border-radius: 2px;
+  padding: 2px 7px;
+  color: #228DDD;
+  font-size: 12px;
+  line-height: 12px;
+}
+.tag-success{
+  background: #EAF7F0;
+  border: 1px solid #D0F5E0;
+  border-radius: 2px;
+  padding: 2px 7px;
+  color: #33B668;
+  font-size: 12px;
+  line-height: 12px;
+}
+.tag-warning{
+  background: #FFF8E8;
+  border: 1px solid #FFD2B1;
+  border-radius: 2px;
+  padding: 2px 7px;
+  color: #FFA63E;
+  font-size: 12px;
+  line-height: 12px;
+}
