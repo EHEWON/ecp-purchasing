@@ -3,11 +3,11 @@
 namespace App\Modules\Admin\Repository;
 
 use App\Common\Contracts\Repository;
-use App\Common\Models\Supplier;
 use Illuminate\Http\Request;
 use App\Common\Models\{
     UserSupplier,
-    User
+    User,
+    Supplier
 };
 
 class SupplierRegisterRepo extends Repository {

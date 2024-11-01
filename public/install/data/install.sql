@@ -22,8 +22,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `admin_logs`;
 CREATE TABLE `admin_logs`  (
-  `log_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) UNSIGNED NOT NULL DEFAULT 0 COMMENT '管理员Id',
+  `log_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '管理员Id',
   `created_ip` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '创建时的IP',
   `browser_type` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '创建时浏览器类型',
   `log_status` tinyint(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态：1：成功；0：失败',
