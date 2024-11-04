@@ -23,7 +23,8 @@ use Illuminate\Contracts\Bus\Dispatcher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{
     Auth,
-    Redis
+    Redis,
+    DB
 };
 use PhpOffice\PhpSpreadsheet\Style\{
     Alignment,
@@ -58,7 +59,7 @@ class UserRepo extends Repository {
                 . 'u.status,u.is_super,u.sub,u.created_at,u.updated_at,u.deleted_flag');
         $this->getWhere($query, $request);
         $clone = $query->clone();
-        $total = $clone->count();
+        $total = $clone->count(DB::Raw('DISTINCT u.user_id'));
         $this->getPage($query, $request);
         $query->groupBy('u.user_id');
         $this->getOrder($query, $request);
