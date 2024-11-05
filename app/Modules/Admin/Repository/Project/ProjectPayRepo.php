@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
-
- * Date: 2024/1/24
- * Time: 08:44
- */
-
 namespace App\Modules\Admin\Repository\Project;
 
 use App\Common\Contracts\Repository;
@@ -161,7 +154,6 @@ class ProjectPayRepo extends Repository {
         $list['data'] = $data;
         return $list;
     }
-
 
     public function getListByProject(int $projectId, $request = []) {
         if (empty($projectId)) {

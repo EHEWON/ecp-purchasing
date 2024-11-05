@@ -1,23 +1,17 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: wangjh
- * Date: 2018/1/24
- * Time: 08:44
- */
-
 namespace App\Modules\Frontend\Repository;
 
 use App\Common\Contracts\Repository;
 use App\Common\Models\BidBill\{
     BidBillEntry,
-   Sub AS BidBillSub
+    Sub AS BidBillSub
 };
 use App\Modules\Admin\Repository\{
     UnitRepo,
     SupplierBaseRepo
 };
+
 class BiddingEntryRepo extends Repository {
 
     protected $model;

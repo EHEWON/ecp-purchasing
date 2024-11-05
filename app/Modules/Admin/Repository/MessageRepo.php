@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
-
- * Date: 2024/1/24
- * Time: 08:44
- */
-
 namespace App\Modules\Admin\Repository;
 
 use App\Common\Contracts\Repository;

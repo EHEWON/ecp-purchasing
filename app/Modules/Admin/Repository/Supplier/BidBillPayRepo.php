@@ -1,30 +1,28 @@
 <?php
 
-/**
- * Created by PhpStorm.
-
- * Date: 2024/1/24
- * Time: 08:44
- */
-
 namespace App\Modules\Admin\Repository\Supplier;
 
 use App\Common\Contracts\Repository;
-use App\Common\Models\BidBill\BidBill;
-use App\Common\Models\BidBill\BidBillPay;
-use App\Common\Models\BidBill\BidBillSupplier;
-use App\Common\Models\UserSupplier;
-use App\Modules\Admin\Repository\OrgRepo;
-use App\Modules\Admin\Repository\SupplierBaseRepo;
-use App\Modules\Admin\Repository\SupplierContactRepo;
-use App\Modules\Admin\Repository\UserRepo;
-use App\Common\Models\Message;
-use App\Common\Models\MessageReceiver;
+use App\Common\Models\{
+    BidBill\BidBill,
+    BidBill\BidBillPay,
+    BidBill\BidBillSupplier,
+    Message,
+    MessageReceiver,
+    User,
+    UserSupplier
+};
+use App\Modules\Admin\Repository\{
+    SupplierBaseRepo,
+    SupplierContactRepo,
+    UserRepo
+};
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Common\Models\User;
 use Illuminate\Mail\Message AS MailMessage;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\{
+    Auth,
+    Mail
+};
 
 class BidBillPayRepo extends Repository {
 

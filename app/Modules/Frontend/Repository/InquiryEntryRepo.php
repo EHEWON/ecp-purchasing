@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: wangjh
- * Date: 2018/1/24
- * Time: 08:44
- */
-
 namespace App\Modules\Frontend\Repository;
 
 use App\Common\Contracts\Repository;
