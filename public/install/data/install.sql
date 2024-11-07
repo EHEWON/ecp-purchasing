@@ -2009,11 +2009,21 @@ CREATE TABLE `paycond`  (
   `deleted_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'N' COMMENT '删除标志',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `IDX_PUR_PAYCOND_NUMBER`(`number`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '付款条件-主表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '付款条件-主表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of paycond
 -- ----------------------------
+INSERT INTO `paycond` VALUES (1, 'erui-001', 'C', '1', '货到票到验收合格后60天付款', '货到票到验收合格后60天付款', 1, '2024-03-19 13:54:26', 1, '2024-03-19 13:54:26', '2024-03-20 15:30:01', 1, 'N');
+INSERT INTO `paycond` VALUES (2, 'erui-002', 'C', '1', '货到票到验收合格后30天付款', '货到票到验收合格后30天付款', NULL, NULL, 1, '2024-03-19 13:22:44', '2024-03-19 10:16:36', 1, 'N');
+INSERT INTO `paycond` VALUES (3, 'erui-003', 'C', '1', '货到付款', '货到付款', NULL, NULL, 1, '2024-03-19 13:22:44', NULL, 1, 'N');
+INSERT INTO `paycond` VALUES (4, 'erui-004', 'C', '1', '全款提货', '全款提货', NULL, NULL, 1, '2024-03-19 13:22:44', '2024-03-19 13:22:32', 1, 'N');
+INSERT INTO `paycond` VALUES (5, 'erui-005', 'C', '1', '预付20%，全款提货', '预付20%，全款提货', NULL, NULL, 1, '2024-03-11 13:09:40', NULL, 1, 'N');
+INSERT INTO `paycond` VALUES (6, 'erui-006', 'C', '1', '预付30%，货到票到验收合格后30天65%，5%质保金', '预付30%，货到票到验收合格后30天65%，5%质保金', 1, '2024-03-12 09:51:15', 1, '2024-03-12 09:53:16', '2024-03-12 09:53:09', 1, 'N');
+INSERT INTO `paycond` VALUES (7, 'erui-007', 'C', '1', '预付30%，全款提货', '预付30%，全款提货', NULL, NULL, NULL, NULL, NULL, 1, 'N');
+INSERT INTO `paycond` VALUES (8, 'erui-008', 'C', '1', '100%预付订货', '100%预付订货', NULL, NULL, NULL, NULL, NULL, 1, 'N');
+INSERT INTO `paycond` VALUES (9, 'erui-009', 'C', '1', '其他', '其他付款条件', NULL, NULL, NULL, NULL, NULL, 1, 'N');
+
 
 -- ----------------------------
 -- Table structure for permissions
@@ -4108,28 +4118,24 @@ CREATE TABLE `settle_ment_type`  (
   `is_default` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `IDX_T_BD_SETTLTYPE_NUMBER`(`number`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '结算方式-主表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '结算方式-主表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of settle_ment_type
 -- ----------------------------
+INSERT INTO `settle_ment_type` VALUES (1, '1', 'JSFS01', '现金', '1', '1', '1', NULL, '1', 'C', NULL, NULL, 1, '2024-10-22 10:12:22', 1, '2024-10-22 10:12:22', 1, '2024-03-20 15:30:08', 1, '', '1');
+INSERT INTO `settle_ment_type` VALUES (2, '1', 'JSFS02', '现金支票', '1', '1', '1', NULL, '1', 'C', NULL, NULL, 1, '2017-05-06 00:00:00', 1, '2017-05-06 00:00:00', NULL, NULL, 1, ' ', '1');
+INSERT INTO `settle_ment_type` VALUES (3, '1', 'JSFS03', '转账支票', '1', '1', '1', NULL, '1', 'C', NULL, NULL, 1, '2017-05-06 00:00:00', 1, '2017-05-06 00:00:00', NULL, NULL, 1, ' ', '1');
+INSERT INTO `settle_ment_type` VALUES (4, '1', 'JSFS04', '电汇', '1', '1', '1', NULL, '1', 'C', NULL, NULL, 1, '2024-03-19 09:23:38', 1, '2024-03-27 09:04:12', NULL, NULL, 1, '', '1');
+INSERT INTO `settle_ment_type` VALUES (5, '1', 'JSFS05', '信汇', '1', '1', '1', NULL, '1', 'C', NULL, NULL, 1, '2017-05-06 00:00:00', 1, '2017-05-06 00:00:00', NULL, NULL, 1, ' ', '1');
+INSERT INTO `settle_ment_type` VALUES (6, '1', 'JSFS06', '商业承兑汇票', '1', '1', '1', NULL, '1', 'C', NULL, NULL, 1, '2017-05-06 00:00:00', 1, '2017-05-06 00:00:00', NULL, NULL, 1, ' ', '1');
+INSERT INTO `settle_ment_type` VALUES (7, '1', 'JSFS07', '银行承兑汇票', '1', '1', '1', NULL, '1', 'C', NULL, NULL, 1, '2017-05-06 00:00:00', 1, '2017-05-06 00:00:00', NULL, NULL, 1, ' ', '1');
+INSERT INTO `settle_ment_type` VALUES (8, '1', 'JSFS08', '信用证', '1', '1', '1', NULL, '1', 'C', NULL, NULL, 1, '2017-05-06 00:00:00', 1, '2017-05-06 00:00:00', NULL, NULL, 1, ' ', '1');
+INSERT INTO `settle_ment_type` VALUES (9, '1', 'JSFS09', '应收票据背书', '1', '1', '1', NULL, '1', 'C', NULL, NULL, 1, '2017-05-06 00:00:00', 1, '2017-05-06 00:00:00', NULL, NULL, 1, ' ', '1');
+INSERT INTO `settle_ment_type` VALUES (10, '1', 'JSFS10', '内部利息结算', '1', '1', '1', NULL, '1', 'C', NULL, NULL, 1, '2017-05-06 00:00:00', 1, '2017-05-06 00:00:00', NULL, NULL, 1, ' ', '1');
+INSERT INTO `settle_ment_type` VALUES (11, '1', 'JSFS11', '集中结算', '1', '1', '1', NULL, '1', 'C', NULL, NULL, 1, '2017-05-06 00:00:00', 1, '2017-05-06 00:00:00', NULL, NULL, 1, ' ', '1');
+INSERT INTO `settle_ment_type` VALUES (12, '1', 'JSFS12', '票据退票', '1', '1', '1', NULL, '1', 'C', NULL, NULL, 1, '2024-01-31 13:49:48', 1, '2024-01-31 13:49:48', NULL, NULL, 1, '', '1');
 
--- ----------------------------
--- Table structure for simple_upload
--- ----------------------------
-DROP TABLE IF EXISTS `simple_upload`;
-CREATE TABLE `simple_upload`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `filename` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '文件名',
-  `totalsize` int(11) NOT NULL DEFAULT 0 COMMENT '文件大小',
-  `identifier` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '文件md5',
-  `type` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '文件类型',
-  `filepath` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '文件保存路径',
-  `created_at` datetime(0) NOT NULL COMMENT '上传时间',
-  `chunknumber` int(11) NULL DEFAULT NULL,
-  `totalchunks` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of simple_upload
@@ -4295,6 +4301,7 @@ CREATE TABLE `supplier_eva_grade`  (
   `number` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT ' ',
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT ' ',
   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
+  `org_id` bigint(20) NULL DEFAULT NULL,
   `creator_id` bigint(20) NOT NULL DEFAULT 0,
   `create_time` datetime(0) NULL DEFAULT NULL,
   `modifier_id` bigint(20) NOT NULL DEFAULT 0,
@@ -4305,13 +4312,20 @@ CREATE TABLE `supplier_eva_grade`  (
   `disable_date` datetime(0) NULL DEFAULT NULL,
   `enable` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT ' ',
+  `is_pre_setting` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `IDX_PUR_EVAGRADE_FNUMBER`(`number`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '评估等级-主表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '评估等级-主表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of supplier_eva_grade
 -- ----------------------------
+INSERT INTO `supplier_eva_grade` VALUES (1, 'DJ0001', 'A', '', 1, 1, '2018-08-08 15:16:47', 1, '2021-09-01 15:24:37', 0, NULL, 0, NULL, '1', ' ', '1');
+INSERT INTO `supplier_eva_grade` VALUES (2, 'DJ0002', 'B', '', 1, 1, '2018-08-08 17:46:49', 1, '2021-09-01 15:24:42', 0, NULL, 0, NULL, '1', ' ', '1');
+INSERT INTO `supplier_eva_grade` VALUES (3, 'DJ0003', 'D', '', 1, 1, '2018-08-08 17:46:58', 1, '2021-09-25 09:47:51', 0, NULL, 0, NULL, '1', ' ', '1');
+INSERT INTO `supplier_eva_grade` VALUES (4, 'DJ0004', 'E', '', 1, 1, '2018-08-08 17:47:05', 1, '2021-09-25 09:47:56', 0, NULL, 0, NULL, '1', ' ', '1');
+INSERT INTO `supplier_eva_grade` VALUES (5, 'DJ0002', 'C', '', 1, 1, '2021-09-01 15:24:54', 1, '2021-09-25 09:48:01', 0, NULL, 0, NULL, '1', ' ', '1');
+
 
 -- ----------------------------
 -- Table structure for supplier_extend
@@ -4412,16 +4426,13 @@ CREATE TABLE `supplier_group`  (
 -- ----------------------------
 -- Records of supplier_group
 -- ----------------------------
-INSERT INTO `supplier_group` VALUES (1, '01', '制造商', '1', NULL, 0, '2021-06-19 14:00:49', 1, '2021-06-19 14:01:48', 0, NULL, '制造商');
-INSERT INTO `supplier_group` VALUES (2, '02', '代理商', '1', NULL, 0, '2021-06-21 08:30:06', 1, '2021-06-21 08:30:18', 0, NULL, '代理商');
-INSERT INTO `supplier_group` VALUES (3, '03', '经销商', '1', NULL, 0, '2021-06-21 08:30:18', 1, '2021-06-21 08:30:24', 0, NULL, '经销商');
-INSERT INTO `supplier_group` VALUES (4, '04', '服务商', '1', NULL, 0, '2021-06-21 08:30:24', 1, '2021-06-21 08:30:30', 0, NULL, '服务商');
-INSERT INTO `supplier_group` VALUES (5, '05', '物流商', '1', NULL, 0, '2021-06-21 08:30:30', 1, '2021-06-21 08:30:36', 0, NULL, '物流商');
-INSERT INTO `supplier_group` VALUES (6, '99', '其他类', '1', NULL, 0, '2021-06-28 14:06:01', 1, '2021-06-28 14:06:17', 0, NULL, '其他类');
+INSERT INTO `supplier_group` VALUES (1, '01', '制造商', '1', NULL, 0, '2021-06-19 14:00:49', 1, '2021-06-19 14:01:48', 0, NULL, '100000');
+INSERT INTO `supplier_group` VALUES (2, '02', '代理商', '1', NULL, 0, '2021-06-21 08:30:06', 1, '2021-06-21 08:30:18', 0, NULL, '100000');
+INSERT INTO `supplier_group` VALUES (3, '03', '经销商', '1', NULL, 0, '2021-06-21 08:30:18', 1, '2021-06-21 08:30:24', 0, NULL, '100000');
+INSERT INTO `supplier_group` VALUES (4, '04', '服务商', '1', NULL, 0, '2021-06-21 08:30:24', 1, '2021-06-21 08:30:30', 0, NULL, '100000');
+INSERT INTO `supplier_group` VALUES (5, '05', '物流商', '1', NULL, 0, '2021-06-21 08:30:30', 1, '2021-06-21 08:30:36', 0, NULL, '100000');
+INSERT INTO `supplier_group` VALUES (6, '99', '其他类', '1', NULL, 0, '2021-06-28 14:06:01', 1, '2021-06-28 14:06:17', 0, NULL, '100000');
 
--- ----------------------------
--- Records of supplier_group
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for tax_category
