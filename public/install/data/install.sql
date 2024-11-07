@@ -4407,7 +4407,17 @@ CREATE TABLE `supplier_group`  (
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT ' ' COMMENT '描述',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `IDX_T_BD_SUPPLIERGROUP_NUMBER`(`number`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '供应商分类-主表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '供应商分类-主表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of supplier_group
+-- ----------------------------
+INSERT INTO `supplier_group` VALUES (1, '01', '制造商', '1', NULL, 0, '2021-06-19 14:00:49', 1, '2021-06-19 14:01:48', 0, NULL, '制造商');
+INSERT INTO `supplier_group` VALUES (2, '02', '代理商', '1', NULL, 0, '2021-06-21 08:30:06', 1, '2021-06-21 08:30:18', 0, NULL, '代理商');
+INSERT INTO `supplier_group` VALUES (3, '03', '经销商', '1', NULL, 0, '2021-06-21 08:30:18', 1, '2021-06-21 08:30:24', 0, NULL, '经销商');
+INSERT INTO `supplier_group` VALUES (4, '04', '服务商', '1', NULL, 0, '2021-06-21 08:30:24', 1, '2021-06-21 08:30:30', 0, NULL, '服务商');
+INSERT INTO `supplier_group` VALUES (5, '05', '物流商', '1', NULL, 0, '2021-06-21 08:30:30', 1, '2021-06-21 08:30:36', 0, NULL, '物流商');
+INSERT INTO `supplier_group` VALUES (6, '99', '其他类', '1', NULL, 0, '2021-06-28 14:06:01', 1, '2021-06-28 14:06:17', 0, NULL, '其他类');
 
 -- ----------------------------
 -- Records of supplier_group
