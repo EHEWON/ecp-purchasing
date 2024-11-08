@@ -459,6 +459,7 @@ class BidBillCommand extends Command {
                 ->whereIn('entry_status', ['Y', 'A', 'WQR', 'L'])
                 ->get();
         if (empty($supplierObj)) {
+            DB::commit();
             return;
         }
         $bidBillArr = [];

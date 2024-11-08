@@ -665,6 +665,7 @@ class SupplierRepo extends Repository {
             $item['created_at'] = date('Y-m-d H:i:s'); //申报要素          
             $item['updated_at'] = date('Y-m-d H:i:s'); //申报要素     
             $item['source'] = 'REGISTER';
+            $item['purchaser_id'] = '1';
             $item['supplier_group_id'] = '1';
             $list[] = $item;
         }
@@ -673,6 +674,7 @@ class SupplierRepo extends Repository {
             $supplierId = Supplier::insertGetId([
                         'status' => 'DRAFT',
                         'name' => trim($v['name']),
+                        'purchaser_id' => 1,
                         'registered_at' => date('Y-m-d H:i:s'),
                         'created_at' => date('Y-m-d H:i:s'),
                         'number' => $this->getNumber(),
