@@ -2,15 +2,17 @@
 
 namespace App\Modules\Frontend\Service;
 
-use App\Common\Contracts\Service;
+use App\Common\Contracts\Service,
+    App\Common\Helpers\Page;
 use App\Modules\Frontend\Repository\{
     InquiryRepo,
     BiddingRepo,
     TenderingRepo,
     IndexRepo
 };
-use App\Common\Helpers\Page;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis,
+    Illuminate\Support\Facades\Request as FRequest,
+    Illuminate\Http\Request;
 
 class IndexService extends Service {
 
@@ -42,12 +44,17 @@ class IndexService extends Service {
         $tenderingRepo = new TenderingRepo();
         $indexRepo = new IndexRepo();
         $request = new Request();
+        $token = str_replace('Bearer ', '', FRequest::cookie('token'));
+        if (!empty($token) && Redis::command('exists', ['user_' . $token])) {
+            $admin = json_decode(Redis::get('user_' . $token), true);
+        }
         echo view('tpl.index', [
             'inquiry' => $inquiryRepo->getList($request),
             'bidding' => $biddingRepo->getList($request),
             'tendering' => $tenderingRepo->getList($request),
             'last_quote' => $indexRepo->lastQuote(),
             'last_settled' => $indexRepo->lastSettled(),
+            'admin' => !empty($admin) ? $admin : [],
         ]);
         die;
     }

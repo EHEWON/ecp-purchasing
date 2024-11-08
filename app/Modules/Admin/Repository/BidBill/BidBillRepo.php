@@ -962,9 +962,9 @@ class BidBillRepo extends Repository {
         }
         if (!empty($data['enroll_date'])) {
             check($data['enroll_date'] > $time, '报名截止时间必须大于当前时间');
-        }
-        if (!empty($data['enroll_date'])) {
-            $data['bid_status'] = 'A';
+            empty($data['open_date']) ? check($bidBill->open_date > $data['enroll_date'], '预计竞价开始时间必须大于报名截止时间') : null;
+            empty($data['result_date']) ? check($bidBill->result_date > $data['enroll_date'], '预计公布结果时间必须大于报名截止时间') : null;
+             $data['bid_status'] = 'A';
         }
 
         if (!empty($request->open_date) && in_array($bidBill->bid_status, ['A', 'B', 'I', 'K', 'L'])) {
@@ -1340,7 +1340,7 @@ class BidBillRepo extends Repository {
      */
     public function finished(int $id, Request $request) {
         $bidBill = BidBill::where('id', $id)
-                ->select('id','enroll_date', 'bid_status', 'person_id', 'name', 'org_id')
+                ->select('id', 'enroll_date', 'bid_status', 'person_id', 'name', 'org_id')
                 ->first();
 //        $supplierId = $request->supplier_id;
         $finishedReason = $request->finished_reason; //定标意见

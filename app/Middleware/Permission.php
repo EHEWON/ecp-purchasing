@@ -7,6 +7,7 @@ use App\Modules\Admin\Repository\RolesRepo;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redis;
 
 class Permission {
 
@@ -99,20 +100,26 @@ class Permission {
     public function handle(Request $request, Closure $next) {
         // Auth认证
         $auth = Auth()->guard('admin');
+        $authorization = $auth->getToken();
         try {
             if (!$auth->check()) { //未登录踢回，给予错误返回提示
+                !empty($authorization) ? Redis::del('user_' . $authorization) : null;
                 Err('认证失败，请重新登录！', 401);
             }
             $admin = $auth->user();
             if (!$admin->status) {
                 Auth::guard('admin')->logout();
+                !empty($authorization) ? Redis::del('user_' . $authorization) : null;
                 Err('账户已被禁用', 401);
             }
         } catch (TokenExpiredException $e) {
+            !empty($authorization) ? Redis::del('user_' . $authorization) : null;
             Err($e->getMessage(), 401);
         } catch (TokenInvalidException $e) {
+            !empty($authorization) ? Redis::del('user_' . $authorization) : null;
             Err($e->getMessage(), 401);
         } catch (JWTException $e) {
+            !empty($authorization) ? Redis::del('user_' . $authorization) : null;
             Err($e->getMessage(), 401);
         }
         $user = User::selectRaw('user_id,user_type,phone,username,'
@@ -124,18 +131,22 @@ class Permission {
         Auth()->guard('admin')->setUser($user);
         if (!$user) {
             Auth::guard('admin')->logout();
+            !empty($authorization) ? Redis::del('user_' . $authorization) : null;
             Err('账户已被删除', 401);
         }
         if ($user->deleted_flag === 'Y') {
             Auth::guard('admin')->logout();
+            !empty($authorization) ? Redis::del('user_' . $authorization) : null;
             Err('账户已被删除', 401);
         }
         if ($user->status == '0') {
             Auth::guard('admin')->logout();
+            !empty($authorization) ? Redis::del('user_' . $authorization) : null;
             Err('账户已被禁用', 401);
         }
         if ($user->enable == '0') {
             Auth::guard('admin')->logout();
+            !empty($authorization) ? Redis::del('user_' . $authorization) : null;
             Err('账户已被禁用', 401);
         }
 

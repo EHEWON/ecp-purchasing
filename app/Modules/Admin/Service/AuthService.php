@@ -96,6 +96,7 @@ class AuthService extends Service {
         check($admin->status != 0, Lang::get('user.account_disabled'));
         check($admin->enable != 0, Lang::get('user.account_disabled'));
         check($admin->deleted_flag == 'N', Lang::get('user.account_no_exist'));
+        Redis::setex('user_' . $token, $expire, json_encode($admin));
         $userContactsObj = UserContact::where('user_id', $admin->user_id)
                 ->where('deleted_flag', 'N')
                 ->get();
@@ -395,11 +396,12 @@ class AuthService extends Service {
      * @throws \App\Exceptions\Admin\AuthTokenException
      */
     public function me(Request $request) {
+        $authorization = Auth::guard('admin')->getToken();
         if (!$admin = Auth::guard($this->guard)->user()) {
+            !empty($authorization) ? Redis::del('user_' . $authorization) : null;
             Err('TOKEN_EXP');
         }
         $admin['roles'] = [];
-        $authorization = Auth::guard('admin')->getToken();
         $redisKey = md5($authorization);
         $curId = '';
         if (!empty($authorization) && Redis::command('exists', [$redisKey])) {
@@ -485,6 +487,7 @@ class AuthService extends Service {
             Redis::setex('role_' . $admin->user_type, $expire, json_encode($roles_ids));
             Redis::setex('perm_' . $admin->user_type, $expire, json_encode($admin['perm_method']));
         }
+        Redis::setex('user_' . $authorization, $expire, json_encode($admin));
         return $admin;
     }
 
