@@ -21,11 +21,19 @@
                             <img src="/static/ecp_index/banner.png" alt="login">
                         </div>
                         <div class="banner_right flex_direction_col">
-                            <div class="align_center">欢迎来到瑞招采平台，点此注册/登录</div>
+                            @if(!empty($admin))
+                            <div class="align_center">欢迎来到{{env('APP_NAME')}}</div>
+                            <div class="btn_box flex_box mt_12">                             
+                                <span class="banner_left">{{$admin['realname']}}</span>
+                                <a href="/front/#/" class="bth btn_login pointer">进入个人中心</a>
+                            </div>
+                            @else
+                            <div class="align_center">欢迎来到{{env('APP_NAME')}}，点此注册/登录</div>
                             <div class="btn_box flex_box flex_direction_between mt_12">
                                 <a href="/front/#/login" class="bth btn_login pointer">立即登录</a>
                                 <a href="/front/#/register" class="bth btn_register pointer" type="primary">免费注册</a>
                             </div>
+                            @endif
                             <div class="tab_box flex_box flex_direction_between mt_12">
                                 <div class="tab_li actived">
                                     最新成交
