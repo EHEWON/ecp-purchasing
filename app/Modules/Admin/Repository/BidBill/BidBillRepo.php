@@ -962,9 +962,7 @@ class BidBillRepo extends Repository {
         }
         if (!empty($data['enroll_date'])) {
             check($data['enroll_date'] > $time, '报名截止时间必须大于当前时间');
-            empty($data['open_date']) ? check($bidBill->open_date > $data['enroll_date'], '预计竞价开始时间必须大于报名截止时间') : null;
-            empty($data['result_date']) ? check($bidBill->result_date > $data['enroll_date'], '预计公布结果时间必须大于报名截止时间') : null;
-             $data['bid_status'] = 'A';
+            $data['bid_status'] = 'A';
         }
 
         if (!empty($request->open_date) && in_array($bidBill->bid_status, ['A', 'B', 'I', 'K', 'L'])) {
@@ -972,6 +970,8 @@ class BidBillRepo extends Repository {
         }
         if (!empty($data['enroll_date']) && !empty($data['open_date'])) {
             check($data['open_date'] > $data['enroll_date'], '预计竞价开始时间必须大于报名截止时间');
+        } elseif (empty($data['open_date']) && !empty($data['enroll_date'])) {
+            check($bidBill->open_date > $data['enroll_date'], '预计竞价开始时间必须大于报名截止时间');
         } elseif (!empty($data['open_date']) && empty($data['enroll_date'])) {
             check($data['open_date'] > $bidBill->enroll_date, '预计竞价开始时间必须大于报名截止时间');
             check($data['open_date'] > $time, '预计竞价开始时间必须大于当前时间');
@@ -980,8 +980,12 @@ class BidBillRepo extends Repository {
         if (!empty($request->result_date)) {
             $data['result_date'] = $request->result_date;
         }
-
-        if (!empty($data['result_date']) && !empty($data['open_date'])) {
+        if (empty($data['result_date']) && empty($data['open_date']) && !empty($data['enroll_date'])) {
+            check($bidBill->result_date > $data['enroll_date'], '预计公布结果时间必须大于报名截止时间');
+        } elseif (empty($data['result_date']) && !empty($data['open_date']) && !empty($data['enroll_date'])) {
+            check($bidBill->result_date > $data['enroll_date'], '预计公布结果时间必须大于报名截止时间');
+            check($bidBill->result_date > $data['open_date'], '预计公布结果时间必须大于预计竞价开始时间');
+        } elseif (!empty($data['result_date']) && !empty($data['open_date'])) {
             check($data['result_date'] > $data['open_date'], '预计公布结果时间必须大于预计竞价开始时间');
         } elseif (!empty($data['result_date']) && empty($data['open_date'])) {
             check($data['result_date'] > $bidBill->open_date, '预计公布结果时间必须大于预计竞价开始时间');

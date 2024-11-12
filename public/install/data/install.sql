@@ -479,7 +479,7 @@ CREATE TABLE `bid_mode`  (
   `created_at` datetime(0) NOT NULL COMMENT '创建时间',
   `updated_by` bigint(20) NULL DEFAULT NULL COMMENT '更新人',
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
-  `is_pre_setting` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
+  `is_pre_setting` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `IDX_BID_BIDMODE_FNUMBER`(`number`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '采购方式' ROW_FORMAT = Dynamic;
