@@ -1,15 +1,12 @@
 <?php
 
-
-
 namespace App\Modules\Admin\Repository\Project;
 
-use App\Common\Contracts\FastDFSclient;
-use App\Common\Contracts\Repository;
-use App\Common\Models\Project\Attach;
-use App\Modules\Admin\Repository\UserRepo;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Common\Contracts\Repository,
+    App\Common\Models\Project\Attach,
+    App\Modules\Admin\Repository\UserRepo;
+use Illuminate\Http\Request,
+    Illuminate\Support\Facades\Auth;
 
 class ProjectPublishFileRepo extends Repository {
 
@@ -74,7 +71,13 @@ class ProjectPublishFileRepo extends Repository {
     private function packAndUpload($projectId, $filename) {
         //创建临时目录
         $ds = DIRECTORY_SEPARATOR;
+        $baseDir = base_path() . $ds . 'public' . $ds . 'static' . $ds . 'upload' . $ds;
+        $hashUniqid = strtoupper(hash('sha256', uniqid()));
+        $startDir = substr($hashUniqid, 0, 2);
+        $endDir = substr($hashUniqid, 2, 2);
+        $path = $baseDir . $ds . $startDir . $ds . $endDir . $ds;
         $relativeDir = $ds . 'download' . $ds . date('Ymd') . $ds . uniqid() . $ds;
+        $this->RecursiveMkdir($path);
         $tmpDir = base_path() . $ds . 'public' . $relativeDir;
         $this->RecursiveMkdir($tmpDir);
         $qurey = $this->model->selectRaw('*');
@@ -113,7 +116,8 @@ class ProjectPublishFileRepo extends Repository {
         }
         //生成压缩文件
         $zip = new \ZipArchive();
-        $filepath = dirname($tmpDir) . '/' . $filename;
+        $filname = strtolower($hashUniqid) . '.zip';
+        $filepath = $path . $ds . $filname;
         $res = $zip->open($filepath, \ZIPARCHIVE::CREATE | \ZIPARCHIVE::OVERWRITE);
         if ($res !== true) {
             return false;
@@ -133,23 +137,13 @@ class ProjectPublishFileRepo extends Repository {
             }
         }
         rmdir($tmpDir);
-        //上传至FastDFS
-        $data['tmp_name'] = $filepath;
-        $data['type'] = 'application/zip';
-        $data['name'] = $filename;
-        $fastdfs = new FastDFSclient();
-        $ret = $fastdfs->uploadAttach($data, 'group1');
-        unlink($filepath);
-        if (empty($ret['fileId'])) {
-            return;
-        }
         $admin = Auth::guard('admin')->user();
         Attach::insert([
             'project_id' => $projectId,
             'group' => 'PUBLISH_DOWNLOAD',
             'attach_name' => $filename,
-            'attach_url' => config('upload.host') . '/' . trim($ret['fileId'], '/'),
-            'attach_name' => $ret['file']['name'],
+            'attach_url' => config('upload.host') . '/static/upload/' . $startDir . '/' . $endDir . '/' . $filname,
+            'attach_name' => '标书文件.zip',
             'created_by' => $admin->user_id,
             'created_at' => date('Y-m-d H:i:s'),
         ]);
