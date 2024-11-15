@@ -527,7 +527,7 @@ class BidBillCommand extends Command {
         }
         foreach ($bidBillList as $bidBill) {
             if ($bidBill['check_type'] == '1') {
-                $this->sendCheck($bossUrl, $bidBillArr[$bidBillId]);
+                $this->sendCheck($bossUrl, $bidBillArr[$bidBill['id']]);
             }
         }
 
