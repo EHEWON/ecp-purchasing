@@ -83,9 +83,9 @@ class SendMailJob extends Job {
                 case 'COMPAREAUDIT':
                     return $this->CompareAudit($this->request['email'], $this->request['purchaserName'], $this->request['compareId']);
                 case 'COMPAREPASS':
-                    return $this->ComparePass($this->request['email'], $this->request['purchaserName'], $this->request['data'],$this->request['inquiry_id']);
+                    return $this->ComparePass($this->request['email'], $this->request['purchaserName'], $this->request['data'], $this->request['inquiry_id']);
                 case 'COMPAREREFUSE':
-                    return $this->CompareRefuse($this->request['email'], $this->request['purchaserName'],$this->request['inquiry_id']);
+                    return $this->CompareRefuse($this->request['email'], $this->request['purchaserName'], $this->request['inquiry_id']);
                 case 'SUPPLIERUNFREEZEPASS':
                     return $this->supplierUnFreezePass($this->request['email'], $this->request['supplier_name'], $this->request['supplier_id']);
                 case 'SUPPLIERUNFREEZEREFUSE':
@@ -363,7 +363,8 @@ class SendMailJob extends Job {
             'type' => $this->type,
             'message_to' => $request['email'],
             'title' => '【' . env('APP_NAME') . '】新建账号通知',
-            'message' => json_encode($org),
+            'message' => json_encode(['email' => trim($request['email']),
+            'phone' => trim($request['phone'])]),
             'status' => '',
             'return' => json_encode($response),
             'send_at' => date('Y-m-d H:i:s'),
@@ -415,7 +416,7 @@ class SendMailJob extends Job {
         }
         foreach ($emails AS $email) {
             Mail::mailer('default')
-                    ->send('mail.inquiry', $org, function (MailMessage $message) use ($email, $orgName) {
+                    ->send('mail.inquiry', $org, function (MailMessage $message) use ($email) {
                         $message->to($email);
                         $message->subject('【' . env('APP_NAME') . '】已发布报价邀请');
                     });
