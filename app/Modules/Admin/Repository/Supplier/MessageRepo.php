@@ -10,7 +10,10 @@ use App\Common\Models\{
 };
 use App\Modules\Admin\Repository\OrgRepo;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\{
+    Auth,
+    DB
+};
 
 class MessageRepo extends Repository {
 

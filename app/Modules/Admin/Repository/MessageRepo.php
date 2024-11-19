@@ -3,12 +3,19 @@
 namespace App\Modules\Admin\Repository;
 
 use App\Common\Contracts\Repository;
-use App\Common\Models\Message;
-use App\Common\Models\MessageReceiver;
-use App\Modules\Admin\Repository\SupplierBaseRepo;
-use App\Modules\Admin\Repository\PurchaserRepo;
+use App\Common\Models\{
+    Message,
+    MessageReceiver
+};
+use App\Modules\Admin\Repository\{
+    SupplierBaseRepo,
+    PurchaserRepo
+};
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\{
+    Auth,
+    DB
+};
 
 class MessageRepo extends Repository {
 
@@ -45,7 +52,7 @@ class MessageRepo extends Repository {
         $query->whereIn('m.receiver_type', ['PLATFORM', 'PURCHASER']);
         $query->where('r.read_flag', 'N');
         $query->where('r.deleted_flag', 'N');
-        $total = $query->count();
+        $total = $query->count(DB::Raw('DISTINCT m.id'));
         $list['total'] = $total;
         return $list;
     }
@@ -70,7 +77,7 @@ class MessageRepo extends Repository {
         });
         $this->getWhere($query, $request);
         $clone = $query->clone();
-        $total = $clone->count();
+        $total = $clone->count(DB::Raw('DISTINCT m.id'));
         $this->getPage($query, $request);
         $this->getOrder($query);
         $object = $query
@@ -106,7 +113,7 @@ class MessageRepo extends Repository {
             ->where('r.receiver_id', $userId);
         });
         $this->getWhere($query, $request);
-        return $query->count();
+        return $query->count(DB::Raw('DISTINCT m.id'));
     }
 
     /**
