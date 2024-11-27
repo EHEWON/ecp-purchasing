@@ -67,13 +67,12 @@ wget -O /mnt/libsodium-1.0.18.tar.gz https://github.com/jedisct1/libsodium/relea
 && cd libsodium-1.0.18 \
 && ./configure --libdir=/lib64 \
 && make && make install \
-&& rm /mnt/flibsodium-1.0.18.tar.gz && rm -rf /mnt/libsodium-1.0.18
-cd /mnt/ && tar -zxvf jpegsrc.v9e.tar.gz &&  cd jpeg-9e && ./configure --enable-shared && make && make install
-wget https://github.com/kkos/oniguruma/archive/v6.9.4.tar.gz -O oniguruma-6.9.4.tar.gz 
+&& rm -rf /mnt/libsodium-1.0.18.tar.gz && rm -rf /mnt/libsodium-1.0.18
+cd /mnt/ && tar -zxvf jpegsrc.v9e.tar.gz &&  cd jpeg-9e && ./configure --enable-shared && make && make install 
+wget https://github.com/kkos/oniguruma/archive/v6.9.4.tar.gz -O /mnt/oniguruma-6.9.4.tar.gz 
 cd /mnt/ && tar -zxvf oniguruma-6.9.4.tar.gz && cd oniguruma-6.9.4/ && ./autogen.sh && ./configure --prefix=/usr --libdir=/lib64 \
  && make && make install && rm /mnt/oniguruma-6.9.4.tar.gz && rm -rf /mnt/oniguruma-6.9.4
-cd /mnt/ && tar -zxvf jpegsrc.v9e.tar.gz &&  cd jpeg-9e && ./configure --enable-shared && make && make install \
-&& rm /mnt/jpegsrc.v9e.tar.gz && rm -rf /mnt/jpeg-9e
+
 cd /mnt/ && unzip cmake-3.22.1.zip && cd cmake-3.22.1 && ./bootstrap && make && make install \
 && rm /mnt/cmake-3.22.1.zip && rm -rf /mnt/cmake-3.22.1
 cd /mnt/ && tar -zxvf libzip-1.11.1.tar.gz  && cd libzip-1.11.1 && mkdir build && cd build && cmake .. && make -j4 && make install \

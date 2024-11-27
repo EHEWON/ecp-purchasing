@@ -9,9 +9,9 @@ set $pwd=pwd
 sudo apt update -y
 sudo apt search openssl
 sudo apt install -y vim curl wget tar bzip2 unzip vim-enhanced passwd sudo sudo apt-utils hostname net-tools rsync man telnet  --allowerasing
-sudo apt -y install autoconf curl freetype-devel.x86_64 freetype.x86_64  gcc gmp-devel libcurl libcurl-devel  --allowerasing
-sudo apt install -y  libjpeg-devel libpng-devel.x86_64 libpng.x86_64 sqlite-devel  autoconf automake libtool --allowerasing
-sudo apt install -y  libxml2 libxml2-devel libssl-dev pcre pcre-devel zlib zlib-devel gcc-c++ libwebp-devel libwebp  --allowerasing
+sudo apt -y install autoconf curl freetype-dev.x86_64 freetype.x86_64  gcc gmp-dev libcurl libcurl-dev  --allowerasing
+sudo apt install -y  libjpeg-dev libpng-dev sqlite-dev  autoconf automake libtool --allowerasing
+sudo apt install -y libxslt1.1  libxslt-dev libxml2 libxml2-dev libssl-dev pcre pcre-dev zlib zlib-dev gcc-c++ libwebp-dev libwebp  --allowerasing
 wget -O /mnt/php-8.2.24.tar.gz https://www.php.net/distributions/php-8.2.24.tar.gz --no-check-certificate
 wget -O /mnt/openresty-1.19.9.1.tar.gz https://openresty.org/download/openresty-1.19.9.1.tar.gz
 wget -O /mnt/freetype-2.10.0.tar.gz https://download.savannah.gnu.org/releases/freetype/freetype-2.10.0.tar.gz
@@ -44,7 +44,7 @@ cd /mnt/ && tar -zxvf libzip-1.11.1.tar.gz  && cd libzip-1.11.1 && mkdir build &
 cd /mnt/ && tar -zxvf freetype-2.10.0.tar.gz && cd freetype-2.10.0 && ./configure && make && make install \
 && rm /mnt/freetype-2.10.0.tar.gz && rm -rf /mnt/freetype-2.10.0
 cd /mnt/ && \
-wget -o /mnt/uw-imap/libc-client2007e_2007f~dfsg-7+b3_amd64.deb  http://ftp.hk.debian.org/debian/pool/main/u/uw-imap/libc-client2007e_2007f~dfsg-7+b3_amd64.deb \
+wget -o /mnt/libc-client2007e_2007f~dfsg-7+b3_amd64.deb  http://ftp.hk.debian.org/debian/pool/main/u/uw-imap/libc-client2007e_2007f~dfsg-7+b3_amd64.deb \
 && apt install /mnt/libc-client2007e_2007f~dfsg-7+b3_amd64.deb   && rm /mnt/libc-client2007e_2007f~dfsg-7+b3_amd64.deb 
 cd /mnt/ && wget -o /mnt/uw-mailutils_2007f~dfsg-7+b3_amd64.deb  http://ftp.hk.debian.org/debian/pool/main/u/uw-imap/uw-mailutils_2007f~dfsg-7+b3_amd64.deb \
 && apt install /mnt/uw-mailutils_2007f~dfsg-7+b3_amd64.deb  && rm /mnt/uw-mailutils_2007f~dfsg-7+b3_amd64.deb
@@ -81,7 +81,8 @@ cd /mnt/ && tar -zxvf openresty-1.19.9.1.tar.gz &&  cd openresty-1.19.9.1 \
 --with-http_stub_status_module --with-http_v2_module --with-http_ssl_module --with-stream \
 --with-stream_ssl_module --with-stream_ssl_preread_module \
 && gmake && gmake install
-wget https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.44-el7-x86_64.tar.gz  --no-check-certificate
+wget -O /mnt/mysql-5.7.44-el7-x86_64.tar.gz https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.44-el7-x86_64.tar.gz  --no-check-certificate \
+cd /mnt/ &&  tar -zxvf mysql-5.7.44-el7-x86_64.tar.gz && cp -r mysql-5.7.44-el7-x86_64 /usr/local/mysql
 echo "export PATH=\$PATH:/usr/local/mysql/bin" >>/etc/profile
 echo "export PATH=\$PATH:/usr/local/php/bin" >>/etc/profile
 cd /mnt/ && /usr/local/php/bin/php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');" \
@@ -108,7 +109,7 @@ pid-file=/usr/local/mysql/logs/mariadb.pid" \
 source /etc/profile
 chmod -R 777 /usr/local/mysql/data/
 mkdir /usr/local/mysql/logs/ && chmod -R 777 /usr/local/mysql/logs/
-sudo apt install -y ncurses ncurses-devel
+sudo apt install -y libncursesw6 libncurses-dev
 ln -s  /usr/lib64/libncurses.so.6 /usr/lib64/libncurses.so.5
 ln -s  /usr/lib64/libtinfo.so.6 /usr/lib64/libtinfo.so.5
 ldconfig
@@ -119,7 +120,7 @@ cat /dev/null >/usr/local/mysql/logs/mysql.log
 /etc/init.d/mysqld start
 /usr/local/mysql/bin/mysqld  --user=root --explicit_defaults_for_timestamp
 sudo sudo apt install redis redis-devel -y
-echo "requirepass = ecp@2024" >>/etc/redis.conf
+echo "requirepass  ecp@2024" >>/etc/redis.conf
 sudo systemctl enable redis
 sudo systemctl start redis
 pip3 install supervisor

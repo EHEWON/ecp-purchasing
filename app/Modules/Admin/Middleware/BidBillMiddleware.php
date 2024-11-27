@@ -49,7 +49,7 @@ class BidBillMiddleware {
                 if (!empty($base['max_amount']) && !empty(trim($base['max_amount'])) && $base['max_amount'] <= '0') {
                     check(false, '报价最高限额必须大于0');
                 }
-                if ($base['max_amount'] <= $base['min_amount']) {
+                if (!empty($base['max_amount']) && !empty($base['min_amount']) && $base['max_amount'] <= $base['min_amount']) {
                     check(false, '报价最高限额须大于等于最低限额');
                 }
                 check(!empty($base['name']) && !empty(trim($base['name'])), '请输入项目名称');
@@ -106,7 +106,7 @@ class BidBillMiddleware {
                 if (!empty($base['max_amount']) && !empty(trim($base['max_amount'])) && $base['max_amount'] <= '0') {
                     check(false, '报价最高限额必须大于0');
                 }
-                if ($base['max_amount'] <= $base['min_amount']) {
+                if (!empty($base['max_amount']) && !empty($base['min_amount']) && $base['max_amount'] <= $base['min_amount']) {
                     check(false, '报价最高限额须大于等于最低限额');
                 }
                 check(!empty($base['name']) && !empty(trim($base['name'])), '请输入项目名称');

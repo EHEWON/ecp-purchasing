@@ -59,11 +59,12 @@ class ProjectEntryRepo extends Repository {
             if (!empty($entry['tax_rate']) && !empty($taxRateArr[intval($entry['tax_rate'])])) {
                 $entry['tax_rate_id'] = $taxRateArr[intval($entry['tax_rate'])]; //申报要素 
             } else {
+                $entry['tax_rate'] = null;
                 $entry['tax_rate_id'] = 0;
             }
-            $totalControl += !empty($entry['control_amount']) ? $entry['control_amount'] : 0;
-            $controlAmount = !empty($entry['control_amount']) ? $entry['control_amount'] : 0;
-            $controlVat = !empty($entry['control_amount']) ? $entry['control_amount'] * $entry['tax_rate'] / 100 : 0;
+            $totalControl += !empty($entry['control_amount']) ? floatval($entry['control_amount']) : 0;
+            $controlAmount = !empty($entry['control_amount']) ? floatval($entry['control_amount']) : 0;
+            $controlVat = !empty($entry['control_amount']) && !empty($entry['tax_rate']) ? floatval($entry['control_amount']) * floatval($entry['tax_rate']) / 100 : 0;
             $ctrlAmtExceptVat = $controlAmount - $controlVat;
             $totalCtrlExcVat += $ctrlAmtExceptVat;
             $dataList[] = [
@@ -78,7 +79,7 @@ class ProjectEntryRepo extends Repository {
                 'control_vat' => !empty($controlVat) ? $controlVat : null,
                 'ctrl_amt_except_vat' => !empty($ctrlAmtExceptVat) ? $ctrlAmtExceptVat : null,
                 'tax_rate_id' => !empty($entry['tax_rate_id']) ? $entry['tax_rate_id'] : null,
-                'tax_rate' => !empty($entry['tax_rate']) ? $entry['tax_rate'] : null,
+                'tax_rate' => !empty($entry['tax_rate']) ? floatval($entry['tax_rate']) : null,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ];

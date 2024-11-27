@@ -68,6 +68,7 @@ return [
 
         'redis' => [
             'driver' => 'redis',
+            'read_write_timeout' => 0,
             'connection' => 'default',
              'options' => [
                  \Redis::OPT_READ_TIMEOUT  => -1,

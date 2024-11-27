@@ -54,6 +54,7 @@ return [
             'connection' => 'default',
             'queue' => 'queue_ecp',
             'retry_after' => 3600,
+            'read_write_timeout' => 0,
             'timeout' => 3600,
             'options' => [
                 \Redis::OPT_READ_TIMEOUT => -1,
@@ -66,6 +67,7 @@ return [
             'connection' => 'default',
             'queue' => 'queue_ecp',
             'retry_after' => 3600,
+            'read_write_timeout' => 0,
             'timeout' => 3600,
             'options' => [
                 \Redis::OPT_READ_TIMEOUT => -1,

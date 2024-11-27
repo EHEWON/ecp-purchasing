@@ -498,12 +498,12 @@ class QuoteEntryRepo extends Repository {
             $item['material_name'] = !empty($v[3]) ? trim($v[3]) : '';
             $item['quote_unit_id_name'] = !empty($v[8]) ? trim($v[8]) : '';
             if (!empty($item['quote_unit_id_name']) && !empty($unitArr[$item['quote_unit_id_name']])) {
-//                $unit = Unit::where('name', $item['quote_unit_id_name'])->first();
-                $item['quote_unit_id'] = $unitArr[$item['quote_unit_id_name']]; //申报要素 
+                $item['quote_unit_id'] = $unitArr[$item['quote_unit_id_name']]['id']; //申报要素 
             } else {
                 $item['quote_unit_id'] = 0;
             }
-//            $item['qty'] = !empty($v[9]) ? number_format(trim($v[9]), !empty($unit) ? $unit->precision : 2, '.', '') : 0; //报价数量    
+            $item['inquire_qty'] = !empty($v[9]) ? number_format(trim($v[9]), !empty($unitArr[$item['quote_unit_id_name']]) ? $unitArr[$item['quote_unit_id_name']]['precision'] : 2, '.', '') : 0;
+            $item['qty'] = !empty($v[9]) ? number_format(trim($v[9]), !empty($unitArr[$item['quote_unit_id_name']]) ? $unitArr[$item['quote_unit_id_name']]['precision'] : 2, '.', '') : 0; //报价数量  
             $item['tax_rate'] = !empty($v[10]) ? trim($v[10]) : 0; //税率%
 
             if (!empty($item['tax_rate']) && !empty($taxRateArr[intval($item['tax_rate'])])) {
@@ -601,7 +601,11 @@ class QuoteEntryRepo extends Repository {
 
     public function getUnitNameArr() {
         $unitList = Unit::get()->toArray();
-        return array_column($unitList, 'id', 'name');
+        $ret = [];
+        foreach ($unitList as $unit) {
+            $ret[$unit['name']] = $unit;
+        }
+        return $ret;
     }
 
     /**
