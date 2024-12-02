@@ -13,7 +13,7 @@ class SupplierQuoteEntryMiddleware {
 
     public function handle(Request $request, Closure $next) {
         $currentRoute = app('request')->route()[1];
-        list(, $action) = explode('@', $currentRoute['uses']);
+        list($controller, $action) = explode('@', $currentRoute['uses']);
         switch (strtolower($action)) {
             case 'add':
                 if (empty($request['base'])) {
@@ -26,10 +26,11 @@ class SupplierQuoteEntryMiddleware {
                 $entrys = $request['entrys'];
                 $entryArr = [];
 
-                $totalInquiry = Inquiry::where('id', $base['inquiry_id'])->value('total_inquiry');
+                $inquiry = Inquiry::where('id', $base['inquiry_id'])->selectRaw('total_inquiry,turns')->first();
+
                 $entryCount = 0;
-                if ($totalInquiry) {
-                    $entryCount = Entry::where('inquiry_id', $base['inquiry_id'])->count();
+                if ($inquiry && $inquiry->total_inquiry) {
+                    $entryCount = Entry::where('inquiry_id', $base['inquiry_id'])->whereRaw('FIND_IN_SET(' . $inquiry->turns . ',turns)')->count();
                 }
                 foreach ($entrys as $entry) {
                     if (empty($entry['tax_price']) && empty($entry['price'])) {
@@ -46,7 +47,7 @@ class SupplierQuoteEntryMiddleware {
 //                    check(!empty($entry['warranty_period']), '请输入质保期');
                 }
                 check(!empty($entryArr), '请输入物料信息');
-                if ($totalInquiry) {
+                if ($inquiry && $inquiry->total_inquiry) {
                     check($entryCount === count($entryArr), '整单询价要求所有商品都需要报价');
                 }
                 break;
@@ -58,11 +59,11 @@ class SupplierQuoteEntryMiddleware {
                 if ($base['bill_status'] === 'A') {
                     return $next($request);
                 }
-                $totalInquiry = Inquiry::where('id', $base['inquiry_id'])->value('total_inquiry');
+                $inquiry = Inquiry::where('id', $base['inquiry_id'])->selectRaw('total_inquiry,turns')->first();
 
                 $entryCount = 0;
-                if ($totalInquiry) {
-                    $entryCount = Entry::where('inquiry_id', $base['inquiry_id'])->count();
+                if ($inquiry && $inquiry->total_inquiry) {
+                    $entryCount = Entry::where('inquiry_id', $base['inquiry_id'])->whereRaw('FIND_IN_SET(' . $inquiry->turns . ',turns)')->count();
                 }
                 $entrys = $request['entrys'];
                 $entryArr = [];
@@ -81,7 +82,7 @@ class SupplierQuoteEntryMiddleware {
 //                    check(!empty($entry['warranty_period']), '请输入质保期');
                 }
                 check(!empty($entryArr), '请输入物料信息');
-                if ($totalInquiry) {
+                if ($inquiry && $inquiry->total_inquiry) {
                     check($entryCount === count($entryArr), '整单询价要求所有商品都需要报价');
                 }
                 break;
