@@ -63,4 +63,4 @@ php artisan workman start|stop|restart
 
 如果有BUG或者安全问题，我们会第一时间修复。
 #### 联系我们
-![微信群二维码](202412030001.jpg)
+![微信群二维码](mmqrcode1733185822834.png)
