@@ -394,7 +394,7 @@ class QuoteEntryRepo extends Repository {
                 $sheet->getStyle($clumnName . 2)->applyFromArray($fillstyle);
             }
         }
-        $sheet->getComment('K2')->getText()->createTextRun('税率取值为0,3,5,6,9,13');
+        $sheet->getComment('K2')->getText()->createTextRun('税率取值为0,3,5,6,9,13,15');
         $row = 3;
         foreach ($data as $item) {
             //数字转字母从65开始：
@@ -512,10 +512,10 @@ class QuoteEntryRepo extends Repository {
                 $item['tax_rate_id'] = 0;
             }
             $item['tax_price'] = !empty($v[11]) ? number_format(trim($v[11]), 2, '.', '') : 0.00; //含税单价
-            $item['warranty_period'] = !empty($v[12]) ? number_format(trim($v[12]), 2, '.', '') : 0.00; //含税单价
-            $item['node'] = !empty($v[13]) ? number_format(trim($v[13]), 2, '.', '') : 0.00; //含税单价
-            $item['spec_model'] = !empty($v[14]) ? number_format(trim($v[14]), 2, '.', '') : 0.00; //含税单价
-            $item['specification_model'] = !empty($v[14]) ? number_format(trim($v[14]), 2, '.', '') : 0.00; //含税单价
+            $item['warranty_period'] = !empty($v[12]) ? trim($v[12]) : ''; //含税单价
+            $item['node'] = !empty($v[13]) ? trim($v[13]) : ''; //含税单价
+            $item['spec_model'] = !empty($v[14]) ? trim($v[14]) : ''; //含税单价
+            $item['specification_model'] = !empty($v[14]) ? trim($v[14]) : ''; //含税单价
             $list[] = $item;
         }
         (new InquiryEntryRepo)->setEntryInfos($list);
