@@ -23,35 +23,19 @@
 
 首先，更新系统并安装常用工具：
 
-### CentOS8
 
-```bash
-cd /etc/yum.repos.d/ && sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-* && sed -i 's|#baseurl=http://mirror.centos.org|baseurl=https://mirrors.aliyun.com|g' /etc/yum.repos.d/CentOS-* \
-&& sed -i 's|baseurl=http://vault.centos.org|baseurl=https://mirrors.aliyun.com|g' /etc/yum.repos.d/CentOS-*
-sudo apt update -y
-sudo apt install -y vim curl wget tar bzip2 unzip vim-enhanced passwd sudo yum-utils hostname net-tools rsync man telnet
-sudo apt -y install autoconf curl freetype-devel.x86_64 freetype.x86_64  gcc gmp-devel libcurl libcurl-devel 
-sudo apt install -y  libjpeg-devel libpng-devel.x86_64 libpng.x86_64 sqlite-devel  autoconf automake libtool
-sudo apt-get install libssl-dev
-```
-### CentOS7
-
-```bash
-cd /etc/yum.repos.d/ && sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-* && sed -i 's|#baseurl=http://mirror.centos.org|baseurl=https://mirrors.aliyun.com|g' /etc/yum.repos.d/CentOS-* \
-&& sed -i 's|baseurl=http://vault.centos.org|baseurl=https://mirrors.aliyun.com|g' /etc/yum.repos.d/CentOS-*
-sudo yum update -y
-sudo apt install -y vim curl wget tar bzip2 unzip vim-enhanced passwd sudo apt-utils hostname net-tools rsync man telnet  --allowerasing
-sudo apt -y install autoconf curl freetype-devel.x86_64 freetype.x86_64  gcc gmp-devel libcurl libcurl-devel  --allowerasing
-sudo apt install -y  libjpeg-devel libpng-devel.x86_64 libpng.x86_64 sqlite-devel  autoconf automake libtool --allowerasing
-sudo apt install -y  libxml2 libxml2-devel openssl openssl-devel compat-openssl10 openssl-pkcs11 \
- openssl-perl openssl-libs pcre pcre-devel zlib zlib-devel gcc-c++ libxslt* libwebp-devel libwebp  --allowerasing
-```
 
 ## 2. 安装 PHP 和必要的扩展
 
 ### 安装 PHP 8.2
 
 ```bash
+sudo apt update -y
+sudo apt search openssl
+sudo apt install -y vim curl wget tar bzip2 unzip vim-enhanced passwd sudo sudo apt-utils hostname net-tools rsync man telnet  --allowerasing
+sudo apt -y install autoconf curl freetype-dev.x86_64 freetype.x86_64  gcc gmp-dev libcurl libcurl-dev  --allowerasing
+sudo apt install -y  libjpeg-dev libpng-dev sqlite-dev  autoconf automake libtool --allowerasing
+sudo apt install -y libxslt1.1  libxslt-dev libxml2 libxml2-dev libssl-dev pcre pcre-dev zlib zlib-dev gcc-c++ libwebp-dev libwebp  --allowerasing
 wget -O /mnt/php-8.2.24.tar.gz https://www.php.net/distributions/php-8.2.24.tar.gz --no-check-certificate
 wget -O /mnt/openresty-1.19.9.1.tar.gz https://openresty.org/download/openresty-1.19.9.1.tar.gz
 wget -O /mnt/freetype-2.10.0.tar.gz https://download.savannah.gnu.org/releases/freetype/freetype-2.10.0.tar.gz
@@ -61,31 +45,33 @@ wget -O /mnt/redis-5.3.5.tgz https://pecl.php.net/get/redis-5.3.5.tgz
 wget -O /mnt/cmake-3.22.1.zip https://github.com/Kitware/CMake/releases/download/v3.22.1/cmake-3.22.1.zip
 wget -O /mnt/libzip-1.11.1.tar.gz  https://libzip.org/download/libzip-1.11.1.tar.gz --no-check-certificate
 wget -O /mnt/oniguruma-6.9.4.tar.gz  https://github.com/kkos/oniguruma/archive/v6.9.4.tar.gz --no-check-certificate
+wget -O /mnt/libpng-1.5.30.tar.gz  https://sourceforge.net/projects/libpng/files/libpng15/1.5.30/libpng-1.5.30.tar.gz --no-check-certificate
 wget -O /mnt/libsodium-1.0.18.tar.gz https://github.com/jedisct1/libsodium/releases/download/1.0.18-RELEASE/libsodium-1.0.18.tar.gz \
 && cd /mnt/ \
 && tar zxf libsodium-1.0.18.tar.gz \
 && cd libsodium-1.0.18 \
 && ./configure --libdir=/lib64 \
 && make && make install \
-&& rm -rf /mnt/libsodium-1.0.18.tar.gz && rm -rf /mnt/libsodium-1.0.18
-cd /mnt/ && tar -zxvf jpegsrc.v9e.tar.gz &&  cd jpeg-9e && ./configure --enable-shared && make && make install 
-wget https://github.com/kkos/oniguruma/archive/v6.9.4.tar.gz -O /mnt/oniguruma-6.9.4.tar.gz 
+&& rm /mnt/flibsodium-1.0.18.tar.gz && rm -rf /mnt/libsodium-1.0.18
+cd /mnt/ && tar -zxvf jpegsrc.v9e.tar.gz &&  cd jpeg-9e && ./configure --enable-shared && make && make install
+wget https://github.com/kkos/oniguruma/archive/v6.9.4.tar.gz -O oniguruma-6.9.4.tar.gz 
 cd /mnt/ && tar -zxvf oniguruma-6.9.4.tar.gz && cd oniguruma-6.9.4/ && ./autogen.sh && ./configure --prefix=/usr --libdir=/lib64 \
  && make && make install && rm /mnt/oniguruma-6.9.4.tar.gz && rm -rf /mnt/oniguruma-6.9.4
-
+cd /mnt/ && tar -zxvf jpegsrc.v9e.tar.gz &&  cd jpeg-9e && ./configure --enable-shared && make && make install \
+&& rm /mnt/jpegsrc.v9e.tar.gz && rm -rf /mnt/jpeg-9e
+cd /mnt/ && tar -zxvf /mnt/libpng-1.5.30.tar.gz &&  cd libpng-1.5.30 && ./configure && make && make install \
+&& rm /mnt/libpng-1.5.30.tar.gz && rm -rf /mnt/libpng-1.5.30
 cd /mnt/ && unzip cmake-3.22.1.zip && cd cmake-3.22.1 && ./bootstrap && make && make install \
 && rm /mnt/cmake-3.22.1.zip && rm -rf /mnt/cmake-3.22.1
 cd /mnt/ && tar -zxvf libzip-1.11.1.tar.gz  && cd libzip-1.11.1 && mkdir build && cd build && cmake .. && make -j4 && make install \
 && rm /mnt/libzip-1.11.1.tar.gz && rm -rf /mnt/libzip-1.11.1
 cd /mnt/ && tar -zxvf freetype-2.10.0.tar.gz && cd freetype-2.10.0 && ./configure && make && make install \
 && rm /mnt/freetype-2.10.0.tar.gz && rm -rf /mnt/freetype-2.10.0
-#COPY mysql-5.7.44-el7-x86_64.tar.gz /mnt/mysql-5.7.44-el7-x86_64.tar.gz
-# cd /mnt/ && tar -zxvf mysql-5.7.44-el7-x86_64.tar.gz && mv mysql-5.7.44-el7-x86_64 /usr/local/mysql
-RUN  wget -O /mnt/libc-client-2007f-16.el7.x86_64.rpm https://mirrors.aliyun.com/epel/7/x86_64/Packages/l/libc-client-2007f-16.el7.x86_64.rpm --no-check-certificate
-RUN  cd /mnt/ && rpm -Uvh libc-client-2007f-16.el7.x86_64.rpm && ln -s /usr/lib64/libc-client.so /usr/lib/libc-client.so \
-&& rm /mnt/libc-client-2007f-16.el7.x86_64.rpm
-RUN  wget -O /mnt/uw-imap-devel-2007f-16.el7.x86_64.rpm https://mirrors.aliyun.com/epel/7/x86_64/Packages/u/uw-imap-devel-2007f-16.el7.x86_64.rpm --no-check-certificate
-RUN  cd /mnt/ && rpm -Uvh uw-imap-devel-2007f-16.el7.x86_64.rpm && rm /mnt/uw-imap-devel-2007f-16.el7.x86_64.rpm
+cd /mnt/ && \
+wget -o /mnt/libc-client2007e_2007f~dfsg-7+b3_amd64.deb  http://ftp.hk.debian.org/debian/pool/main/u/uw-imap/libc-client2007e_2007f~dfsg-7+b3_amd64.deb \
+&& apt install /mnt/libc-client2007e_2007f~dfsg-7+b3_amd64.deb   && rm /mnt/libc-client2007e_2007f~dfsg-7+b3_amd64.deb 
+cd /mnt/ && wget -o /mnt/uw-mailutils_2007f~dfsg-7+b3_amd64.deb  http://ftp.hk.debian.org/debian/pool/main/u/uw-imap/uw-mailutils_2007f~dfsg-7+b3_amd64.deb \
+&& apt install /mnt/uw-mailutils_2007f~dfsg-7+b3_amd64.deb  && rm /mnt/uw-mailutils_2007f~dfsg-7+b3_amd64.deb
 cd /mnt/ &&  tar -zxvf /mnt/php-8.2.24.tar.gz && cd php-8.2.24 && \
  ./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-mysqli --with-pcre-regex \
 --with-pdo-mysql --with-pdo-sqlite --with-pear --with-png-dir --with-xmlrpc --with-openssl --with-xsl --with-curl \
@@ -114,13 +100,6 @@ cd /mnt/php-8.2.24/ext/sodium  \
 && rm /mnt/php-8.2.24.tar.gz && rm -rf /mnt/php-8.2.24
 sed -i 's|post_max_size = 8M|post_max_size = 80M|g' /usr/local/php/etc/php.ini
 sed -i 's|upload_max_filesize = 2M|upload_max_filesize = 80M|g' /usr/local/php/etc/php.ini
-cd /mnt/ && /usr/local/php/bin/php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');" \
-&& /usr/local/php/bin/php composer-setup.php \
-&& /usr/local/php/bin/php -r "unlink('composer-setup.php');" \
-&& sudo mv composer.phar /usr/local/bin/composer \
-&& /usr/local/bin/composer config --global process-timeout 2000 \
-&& /usr/local/bin/composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
-&& cd $pwd && cd ../ && /usr/local/php/bin/php /usr/local/bin/composer install
 ```
 
 ### 启动 PHP-FPM
@@ -130,7 +109,8 @@ cd /mnt/ && /usr/local/php/bin/php -r "copy('https://install.phpcomposer.com/ins
 ```
 ## 3. 安装 REDIS 数据库
 ```bash
-sudo yum install redis redis-devel -y
+sudo apt-get update
+sudo apt install redis redis-devel -y
 echo "requirepass = ecp@2024" >>/etc/redis.conf
 sudo systemctl enable redis
 sudo systemctl start redis
@@ -142,7 +122,8 @@ sudo systemctl start redis
 
 ```bash
 # CentOS
-sudo yum install -y mysql-server
+sudo apt-get update
+sudo apt install -y mysql-server
 ```
 
 ### 启动 MySQL 服务
@@ -176,28 +157,16 @@ CREATE DATABASE ezwork;
 mysql -uroot -p ezwork < ./init.sql
 ```
 
-## 5. 下载并配置 EzWork 项目
+## 5. 下载并配置项目
 
 ### 克隆项目代码
 
 ```bash
-cd /var/www
-sudo git clone https://github.com/EHEWON/ezwork-ai-doc-translation.git ezwork
-cd ezwork
-sudo git checkout master
-sudo git submodule update --init --recursive
-cd api
-sudo git checkout master
-sudo git pull
-sudo curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
-sudo composer install
-cd ../frontend
-sudo git checkout master
-sudo git pull
-cd ../admin
-sudo git checkout master
-sudo git pull
-cd ..
+cd /data/www/
+sudo git clone git clone https://gitee.com/ehewon/ecp-purchasing.git ecp-purchasing
+cd ecp-purchasing
+composer config -g repo.packagist composer https://mirrors.aliyun.com/composer
+composer install
 ```
 
 
@@ -218,8 +187,8 @@ sudo systemctl status php-fpm  # CentOS
 如果您需要通过 Nginx 作为反向代理来处理 HTTP 请求，可以安装并配置 Nginx：
 
 ```bash
-sudo yum install -y epel-release
-sudo yum install -y nginx
+sudo apt update
+sudo apt install -y nginx
 ```
 
 ### 配置 Nginx
@@ -229,23 +198,23 @@ sudo yum install -y nginx
 ```nginx
 server {
     listen 80;
-    server_name xxx.xxx.com;   
+    server_name xxx.xxx.com;
     server_tokens off;
     index index.html index.htm index.php ;
-    root /var/www/public/;
+    root /data/www/ecp-purchasing/public/;
     access_log /var/log/nginx/ecpbase.erui.com_access.log;
     error_log /var/log/nginx/ecpbase.erui.com_error.log;
     location /front {
         add_header Cache-Control "private, no-store, no-cache, must-revalidate, proxy-revalidate";
         access_log on;
         index index.php index.html index.htm;
-        alias /var/www/public/front/;
+        alias /data/www/ecp-purchasing/front/;
     }
     location /front/ {
         add_header Cache-Control "private, no-store, no-cache, must-revalidate, proxy-revalidate";
         access_log on;
         index index.php index.html index.htm;
-        alias /var/www/public/front/;
+        alias /data/www/ecp-purchasing/front/;
     }
 
     location /wss {
@@ -267,7 +236,7 @@ server {
         rewrite ^/(.*)$ /index.php?s=$1 last;
     }
     location ~ \.php$ {
-        root /var/www/public/;
+        root /data/www/ecp-purchasing/public/;
         include fastcgi.conf;
         fastcgi_pass 127.0.0.1:9000;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -291,7 +260,7 @@ server {
 }
 
 upstream basewebsock {
-    server 127.0.0.1:23092;
+    server 127.0.0.1:23090;
 }
 
 ```

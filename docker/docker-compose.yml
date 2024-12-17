@@ -40,7 +40,7 @@ services:
     networks:
       - ecpnet
     volumes:
-      - /www/wwwroot:/var/www/html
+      - /data/www/wwwroot:/var/www/html
     working_dir: /var/www/html
     stdin_open: true
     tty: true

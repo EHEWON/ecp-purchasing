@@ -130,7 +130,15 @@ cd /mnt/ && /usr/local/php/bin/php -r "copy('https://install.phpcomposer.com/ins
 ```bash
 /usr/local/php/sbin/php-fpm -R
 ```
-## 3. 安装 REDIS 数据库
+## 3. 安装 composer 
+```bash
+php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+sudo mv composer.phar /usr/local/bin/composer
+```
+
+## 4. 安装 REDIS 数据库
 ```bash
 sudo yum install redis redis-devel -y
 echo "requirepass = ecp@2024" >>/etc/redis.conf
@@ -138,7 +146,7 @@ sudo systemctl enable redis
 sudo systemctl start redis
 ```
 
-## 4. 安装 MySQL 数据库
+## 5. 安装 MySQL 数据库
 
 ### 安装 MySQL
 
@@ -165,47 +173,26 @@ sudo mysql_secure_installation
 mysql -uroot -p
 
 # 创建数据库和用户并授权
-CREATE DATABASE ezwork;
+CREATE DATABASE erui_ecp;
 ```
 
-### 初始化数据库
 
-在您项目的 `init.sql` 文件中创建所需的表和初始数据。例如：
-
-将上述 SQL 语句运行到 MySQL 中。
-
-```bash
-mysql -uroot -p ezwork < ./init.sql
-```
-
-## 5. 下载并配置 EzWork 项目
+## 6. 下载并配置项目
 
 ### 克隆项目代码
 
 ```bash
-cd /var/www
-sudo git clone https://github.com/EHEWON/ezwork-ai-doc-translation.git ezwork
-cd ezwork
-sudo git checkout master
-sudo git submodule update --init --recursive
-cd api
-sudo git checkout master
-sudo git pull
-sudo curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
-sudo composer install
-cd ../frontend
-sudo git checkout master
-sudo git pull
-cd ../admin
-sudo git checkout master
-sudo git pull
-cd ..
+cd /data/www/
+sudo git clone git clone https://gitee.com/ehewon/ecp-purchasing.git ecp-purchasing
+cd ecp-purchasing
+composer config -g repo.packagist composer https://mirrors.aliyun.com/composer
+composer install
 ```
 
 
 
 
-## 6. 启动服务
+## 7. 启动服务
 
 ### 启动 PHP-FPM
 
@@ -225,7 +212,7 @@ sudo yum install -y nginx
 ```
 
 ### 配置 Nginx
-- 须把 xxx.xxx.com 替换成您的域名 ,xxx.pem,xxx_privkey.pem替换成您的SSL证书和私钥，/var/www/public/替换成您的目录地址
+
 在 `/etc/nginx/conf.d/` 目录下创建一个新的配置文件（如 `ezwork`），并添加以下内容：
 
 ```nginx
@@ -234,20 +221,20 @@ server {
     server_name xxx.xxx.com;
     server_tokens off;
     index index.html index.htm index.php ;
-    root /var/www/public/;
+    root /data/www/ecp-purchasing/public/;
     access_log /var/log/nginx/ecpbase.erui.com_access.log;
     error_log /var/log/nginx/ecpbase.erui.com_error.log;
     location /front {
         add_header Cache-Control "private, no-store, no-cache, must-revalidate, proxy-revalidate";
         access_log on;
         index index.php index.html index.htm;
-        alias /var/www/public/front/;
+        alias /data/www/ecp-purchasing/front/;
     }
     location /front/ {
         add_header Cache-Control "private, no-store, no-cache, must-revalidate, proxy-revalidate";
         access_log on;
         index index.php index.html index.htm;
-        alias /var/www/public/front/;
+        alias /data/www/ecp-purchasing/front/;
     }
 
     location /wss {
@@ -269,7 +256,7 @@ server {
         rewrite ^/(.*)$ /index.php?s=$1 last;
     }
     location ~ \.php$ {
-        root /var/www/public/;
+        root /data/www/ecp-purchasing/public/;
         include fastcgi.conf;
         fastcgi_pass 127.0.0.1:9000;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -293,9 +280,8 @@ server {
 }
 
 upstream basewebsock {
-    server 127.0.0.1:23092;
+    server 127.0.0.1:23090;
 }
-
 ```
 
 ### 启动 Nginx

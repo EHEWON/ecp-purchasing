@@ -23,13 +23,8 @@
 
 首先，更新系统并安装常用工具：
 
-### CentOS8
-
-```bash
-cd /etc/yum.repos.d/ && sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-* && sed -i 's|#baseurl=http://mirror.centos.org|baseurl=https://mirrors.aliyun.com|g' /etc/yum.repos.d/CentOS-* \
-&& sed -i 's|baseurl=http://vault.centos.org|baseurl=https://mirrors.aliyun.com|g' /etc/yum.repos.d/CentOS-*
 sudo brew update -y
-sudo brew install -y vim curl wget tar bzip2 unzip vim-enhanced passwd sudo yum-utils hostname net-tools rsync man telnet  --allowerasing
+sudo brew install -y vim curl wget tar bzip2 unzip vim-enhanced passwd sudo hostname net-tools rsync man telnet  --allowerasing
 sudo brew -y install autoconf curl freetype-devel.x86_64 freetype.x86_64  gcc gmp-devel libcurl libcurl-devel  --allowerasing
 sudo brew install -y  libjpeg-devel libpng-devel.x86_64 libpng.x86_64 sqlite-devel  autoconf automake libtool --allowerasing
 sudo brew install -y  libxml2 libxml2-devel openssl openssl-devel compat-openssl10 openssl-pkcs11 \
@@ -110,7 +105,6 @@ cd /mnt/ && /usr/local/php/bin/php -r "copy('https://install.phpcomposer.com/ins
 && sudo mv composer.phar /usr/local/bin/composer \
 && /usr/local/bin/composer config --global process-timeout 2000 \
 && /usr/local/bin/composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
-&& cd $pwd && cd ../ && /usr/local/php/bin/php /usr/local/bin/composer install
 ```
 
 ### 启动 PHP-FPM
@@ -120,7 +114,7 @@ cd /mnt/ && /usr/local/php/bin/php -r "copy('https://install.phpcomposer.com/ins
 ```
 ## 3. 安装 REDIS 数据库
 ```bash
-sudo yum install redis redis-devel -y
+sudo brew install redis redis-devel -y
 echo "requirepass = ecp@2024" >>/etc/redis.conf
 sudo systemctl enable redis
 sudo systemctl start redis
@@ -131,8 +125,7 @@ sudo systemctl start redis
 ### 安装 MySQL
 
 ```bash
-# CentOS
-sudo yum install -y mysql-server
+sudo brew install -y mysql-server
 ```
 
 ### 启动 MySQL 服务
@@ -166,28 +159,16 @@ CREATE DATABASE ezwork;
 mysql -uroot -p ezwork < ./init.sql
 ```
 
-## 5. 下载并配置 EzWork 项目
+## 5. 下载并配置项目
 
 ### 克隆项目代码
 
 ```bash
-cd /var/www
-sudo git clone https://github.com/EHEWON/ezwork-ai-doc-translation.git ezwork
-cd ezwork
-sudo git checkout master
-sudo git submodule update --init --recursive
-cd api
-sudo git checkout master
-sudo git pull
-sudo curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
-sudo composer install
-cd ../frontend
-sudo git checkout master
-sudo git pull
-cd ../admin
-sudo git checkout master
-sudo git pull
-cd ..
+cd /data/www/
+sudo git clone git clone https://gitee.com/ehewon/ecp-purchasing.git ecp-purchasing
+cd ecp-purchasing
+composer config -g repo.packagist composer https://mirrors.aliyun.com/composer
+composer install
 ```
 
 
@@ -208,8 +189,8 @@ sudo systemctl status php-fpm  # CentOS
 如果您需要通过 Nginx 作为反向代理来处理 HTTP 请求，可以安装并配置 Nginx：
 
 ```bash
-sudo yum install -y epel-release
-sudo yum install -y nginx
+sudo brew install -y epel-release
+sudo brew install -y nginx
 ```
 
 ### 配置 Nginx
@@ -218,23 +199,24 @@ sudo yum install -y nginx
 
 ```nginx
 server {
-    listen 80;  
+    listen 80;
+    server_name xxx.xxx.com;
     server_tokens off;
     index index.html index.htm index.php ;
-    root /var/www/public/;
+    root /data/www/ecp-purchasing/public/;
     access_log /var/log/nginx/ecpbase.erui.com_access.log;
     error_log /var/log/nginx/ecpbase.erui.com_error.log;
     location /front {
         add_header Cache-Control "private, no-store, no-cache, must-revalidate, proxy-revalidate";
         access_log on;
         index index.php index.html index.htm;
-        alias /var/www/public/front/;
+        alias /data/www/ecp-purchasing/front/;
     }
     location /front/ {
         add_header Cache-Control "private, no-store, no-cache, must-revalidate, proxy-revalidate";
         access_log on;
         index index.php index.html index.htm;
-        alias /var/www/public/front/;
+        alias /data/www/ecp-purchasing/front/;
     }
 
     location /wss {
@@ -256,7 +238,7 @@ server {
         rewrite ^/(.*)$ /index.php?s=$1 last;
     }
     location ~ \.php$ {
-        root /var/www/public/;
+        root /data/www/ecp-purchasing/public/;
         include fastcgi.conf;
         fastcgi_pass 127.0.0.1:9000;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -280,7 +262,7 @@ server {
 }
 
 upstream basewebsock {
-    server 127.0.0.1:23092;
+    server 127.0.0.1:23090;
 }
 
 
