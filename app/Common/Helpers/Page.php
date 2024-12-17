@@ -83,27 +83,22 @@ class Page {
             $url = $this->url2;
         }
         $pageStr = str_replace(urlencode('[PAGE]'), $page, str_replace(urlencode('[PAGESIZE]'), $pagesize, $url));
-        if (false !== strpos($pageStr, '&page=1')) {
-            // 直接作为路由地址解析
-            $pageStr = str_replace('&page=1', '', $pageStr);
-        } elseif (false !== strpos($pageStr, 'page=1&')) {
+        if (false !== strpos($pageStr, 'page=1&')) {
             $pageStr = str_replace('page=1&', '', $pageStr);
-        } elseif (false !== strpos($pageStr, '?page=1') && strlen($pageStr) - 7 !== strpos($pageStr, '?page=1')) {
-            $pageStr = str_replace('?page=1', '?', $pageStr);
-        } elseif (false !== strpos($pageStr, '?page=1')) {
-            $pageStr = str_replace('?page=1', '', $pageStr);
         }
 
-       if (false !== strpos($pageStr, '&pagesize=' . $this->default_pagesize)) {
+        if (false !== strpos($pageStr, '&pagesize=' . $this->default_pagesize)) {
             // 直接作为路由地址解析
             $pageStr = str_replace('&pagesize=' . $this->default_pagesize, '', $pageStr);
-        } elseif (false !== strpos($pageStr, '?pagesize=' . $this->default_pagesize) && strlen($pageStr) - 10- strlen($this->default_pagesize) !== strpos($pageStr, '?page=1')) {
+        } elseif (false !== strpos($pageStr, '?pagesize=' . $this->default_pagesize) && strlen($pageStr) - 10 - strlen($this->default_pagesize) !== strpos($pageStr, '?page=1')) {
             $pageStr = str_replace('?pagesize=' . $this->default_pagesize, '?', $pageStr);
         } elseif (false !== strpos($pageStr, '?pagesize=' . $this->default_pagesize)) {
             $pageStr = str_replace('?pagesize=' . $this->default_pagesize, '', $pageStr);
         }
-
-        return $pageStr;
+        $pageStr = rtrim($pageStr, '?page=1');
+        $pageStr = rtrim($pageStr, '&page=1');
+        $pageStr = rtrim($pageStr, '&');
+        return rtrim($pageStr, '?');
     }
 
     /**
