@@ -10,12 +10,12 @@ cd /etc/yum.repos.d/ && sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/Cen
 set $pwd=pwd
 yum update -y
 yum search openssl
-yum install -y vim curl wget tar bzip2 unzip vim-enhanced passwd sudo yum-utils hostname net-tools rsync man telnet  --allowerasing
+yum install -y vim curl wget tar bzip2 unzip vim passwd sudo yum-utils hostname net-tools rsync man telnet  --allowerasing
 yum -y install autoconf curl freetype-devel.x86_64 freetype.x86_64  gcc gmp-devel libcurl libcurl-devel  --allowerasing
 yum install -y  libjpeg-devel libpng-devel.x86_64 libpng.x86_64 sqlite-devel  autoconf automake libtool --allowerasing
 yum install -y  libxml2 libxml2-devel openssl openssl-devel compat-openssl10 openssl-pkcs11 \
  openssl-perl openssl-libs pcre pcre-devel zlib zlib-devel gcc-c++ libxslt* libwebp-devel libwebp  --allowerasing
-wget -O /mnt/php-8.2.24.tar.gz https://www.php.net/distributions/php-8.2.24.tar.gz --no-check-certificate
+wget -O /mnt/php-7.4.33.tar.gz https://www.php.net/distributions/php-7.4.33.tar.gz --no-check-certificate
 wget -O /mnt/openresty-1.19.9.1.tar.gz https://openresty.org/download/openresty-1.19.9.1.tar.gz
 wget -O /mnt/freetype-2.10.0.tar.gz https://download.savannah.gnu.org/releases/freetype/freetype-2.10.0.tar.gz
 wget -O /mnt/jpegsrc.v9e.tar.gz  http://www.ijg.org/files/jpegsrc.v9e.tar.gz
@@ -30,7 +30,7 @@ wget -O /mnt/libsodium-1.0.18.tar.gz https://github.com/jedisct1/libsodium/relea
 && cd libsodium-1.0.18 \
 && ./configure --libdir=/lib64 \
 && make && make install \
-&& rm /mnt/flibsodium-1.0.18.tar.gz && rm -rf /mnt/libsodium-1.0.18
+&& rm /mnt/libsodium-1.0.18.tar.gz && rm -rf /mnt/libsodium-1.0.18
 cd /mnt/ && tar -zxvf jpegsrc.v9e.tar.gz &&  cd jpeg-9e && ./configure --enable-shared && make && make install
 wget https://github.com/kkos/oniguruma/archive/v6.9.4.tar.gz -O oniguruma-6.9.4.tar.gz 
 cd /mnt/ && tar -zxvf oniguruma-6.9.4.tar.gz && cd oniguruma-6.9.4/ && ./autogen.sh && ./configure --prefix=/usr --libdir=/lib64 \

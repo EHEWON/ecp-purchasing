@@ -32,10 +32,10 @@
 ```bash
 sudo apt update -y
 sudo apt search openssl
-sudo apt install -y vim curl wget tar bzip2 unzip vim-enhanced passwd sudo sudo apt-utils hostname net-tools rsync man telnet  --allowerasing
-sudo apt -y install autoconf curl freetype-dev.x86_64 freetype.x86_64  gcc gmp-dev libcurl libcurl-dev  --allowerasing
+sudo apt install -y vim curl wget tar bzip2 unzip  passwd  hostname net-tools rsync man telnet 
+sudo apt -y install autoconf curl  gcc gmp-dev 
 sudo apt install -y  libjpeg-dev libpng-dev sqlite-dev  autoconf automake libtool --allowerasing
-sudo apt install -y libxslt1.1  libxslt-dev libxml2 libxml2-dev libssl-dev pcre pcre-dev zlib zlib-dev gcc-c++ libwebp-dev libwebp  --allowerasing
+sudo apt install -y libxslt1.1  libxslt-dev libxml2 libxml2-dev libssl-dev  pcre-dev zlib zlib-dev 
 wget -O /mnt/php-8.2.24.tar.gz https://www.php.net/distributions/php-8.2.24.tar.gz --no-check-certificate
 wget -O /mnt/openresty-1.19.9.1.tar.gz https://openresty.org/download/openresty-1.19.9.1.tar.gz
 wget -O /mnt/freetype-2.10.0.tar.gz https://download.savannah.gnu.org/releases/freetype/freetype-2.10.0.tar.gz
@@ -52,7 +52,7 @@ wget -O /mnt/libsodium-1.0.18.tar.gz https://github.com/jedisct1/libsodium/relea
 && cd libsodium-1.0.18 \
 && ./configure --libdir=/lib64 \
 && make && make install \
-&& rm /mnt/flibsodium-1.0.18.tar.gz && rm -rf /mnt/libsodium-1.0.18
+&& rm /mnt/libsodium-1.0.18.tar.gz && rm -rf /mnt/libsodium-1.0.18
 cd /mnt/ && tar -zxvf jpegsrc.v9e.tar.gz &&  cd jpeg-9e && ./configure --enable-shared && make && make install
 wget https://github.com/kkos/oniguruma/archive/v6.9.4.tar.gz -O oniguruma-6.9.4.tar.gz 
 cd /mnt/ && tar -zxvf oniguruma-6.9.4.tar.gz && cd oniguruma-6.9.4/ && ./autogen.sh && ./configure --prefix=/usr --libdir=/lib64 \
@@ -121,7 +121,6 @@ sudo systemctl start redis
 ### 安装 MySQL
 
 ```bash
-# CentOS
 sudo apt-get update
 sudo apt install -y mysql-server
 ```

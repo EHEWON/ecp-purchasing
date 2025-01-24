@@ -42,8 +42,6 @@ RUN cd /mnt/ && tar -zxvf libzip-1.11.1.tar.gz  && cd libzip-1.11.1 && mkdir bui
 && rm /mnt/libzip-1.11.1.tar.gz && rm -rf /mnt/libzip-1.11.1
 RUN cd /mnt/ && tar -zxvf freetype-2.10.0.tar.gz && cd freetype-2.10.0 && ./configure && make && make install \
 && rm /mnt/freetype-2.10.0.tar.gz && rm -rf /mnt/freetype-2.10.0
-#COPY mysql-5.7.44-el7-x86_64.tar.gz /mnt/mysql-5.7.44-el7-x86_64.tar.gz
-#RUN  cd /mnt/ && tar -zxvf mysql-5.7.44-el7-x86_64.tar.gz && mv mysql-5.7.44-el7-x86_64 /usr/local/mysql
 RUN  wget -O /mnt/libc-client-2007f-24.el8.x86_64.rpm https://mirrors.aliyun.com/epel/8/Everything/x86_64/Packages/l/libc-client-2007f-24.el8.x86_64.rpm --no-check-certificate
 RUN  cd /mnt/ && rpm -Uvh libc-client-2007f-24.el8.x86_64.rpm && ln -s /usr/lib64/libc-client.so /usr/lib/libc-client.so \
 && rm /mnt/libc-client-2007f-24.el8.x86_64.rpm
@@ -82,9 +80,5 @@ RUN cd /mnt/ && /usr/local/php/bin/php -r "copy('https://install.phpcomposer.com
 && sudo mv composer.phar /usr/local/bin/composer \
 && /usr/local/bin/composer config --global process-timeout 2000 \
 && /usr/local/bin/composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
-#RUN cd /mnt/ && tar -zxvf openresty-1.19.9.1.tar.gz &&  cd openresty-1.19.9.1 \
-#&& ./configure --prefix=/usr/local/openresty --with-cc-opt=-O2 --with-luajit  --with-http_gzip_static_module --with-http_realip_module \
-#--with-http_stub_status_module --with-http_v2_module --with-http_ssl_module --with-stream \
-#--with-stream_ssl_module --with-stream_ssl_preread_module \
-#&& gmake && gmake install
+
 
