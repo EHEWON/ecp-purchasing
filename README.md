@@ -62,4 +62,4 @@ php artisan workman start|stop|restart
 如果有BUG或者安全问题，我们会第一时间修复。
 
 #### 微信交流群
-![微信群二维码](50253.jpg)
+![微信群二维码](20250123171715.jpg)
