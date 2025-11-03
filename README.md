@@ -13,7 +13,7 @@
 
 #### 安装教程
 
-教程地址：https://doc.ruizhaocai.com/#/deploy/
+教程地址：https://doc.starpms.cn/baota.html
 
 #### 环境要求
 
@@ -26,16 +26,6 @@
 #### 页面演示
 ![输入图片说明](920.png)
 ![输入图片说明](9108.png)
-#### 系统演示
-采购商管理后台地址 https://demo.ruizhaocai.com/front
-
-供应商后台管理地址 https://demo.ruizhaocai.com/front
-
-采购商前台网站地址 https://demo.ruizhaocai.com/
-
-采购商账号：admin 密码：ecp@2024
-
-供应商账号：gys@erui.com 密码：ecp@2024
 
 #### 定时任务
 
@@ -61,5 +51,6 @@ php artisan workman start|stop|restart
 
 如果有BUG或者安全问题，我们会第一时间修复。
 
-#### 微信交流群
-![微信群二维码](20250123171715.jpg)
+#### 商务合作
+
+微信：18366970973
